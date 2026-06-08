@@ -1,0 +1,88 @@
+{
+  "code": "CHATO",
+  "nom": "CHATO",
+  "pin": "6007",
+  "brand": "generale",
+  "rh_to": "ressources-humaines@groupe-edgard.com",
+  "rh_cc": "chato@groupe-edgard.com",
+  "periode": {
+    "mois": 5,
+    "annee": 2026
+  },
+  "jours_ouvres": null,
+  "tr": null,
+  "collaborateurs": [
+    {
+      "nom": "BALMER",
+      "prenom": "Jean-Artus",
+      "tps": "39",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "BILLARD",
+      "prenom": "Francois",
+      "tps": "39",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "CHARTIER",
+      "prenom": "Blandine",
+      "tps": "39",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "DEVAINE",
+      "prenom": "Emilie",
+      "tps": "39",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "MEDERIC \n(VALAIZON)",
+      "prenom": "Anne Gaëlle",
+      "tps": "39",
+      "transport": "",
+      "mutuelle": "N",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "PICHARD \n(LECONTE)",
+      "prenom": "Aurélie",
+      "tps": "35",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "POIRIER",
+      "prenom": "Léa",
+      "tps": "39",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "TORRES",
+      "prenom": "Marie",
+      "tps": "39",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    }
+  ]
+}

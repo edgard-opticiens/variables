@@ -1,0 +1,52 @@
+{
+  "code": "HAVRO",
+  "nom": "HAVRO",
+  "pin": "5194",
+  "brand": "edgard",
+  "rh_to": "ressources-humaines@groupe-edgard.com",
+  "rh_cc": "havro@groupe-edgard.com",
+  "periode": {
+    "mois": 5,
+    "annee": 2026
+  },
+  "jours_ouvres": null,
+  "tr": null,
+  "collaborateurs": [
+    {
+      "nom": "CHRISTOPHE",
+      "prenom": "Christine",
+      "tps": "35",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "DUBEGNY",
+      "prenom": "Ingrid",
+      "tps": "36",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": "CPP du 01/11/25 au 31/10/26\nReprise anticipé à 36h le 01/06/26"
+    },
+    {
+      "nom": "LEROUSSEAU",
+      "prenom": "Lucie",
+      "tps": "35",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": "Ct Appr. BTS OL - 01/08/24 au 31/07/26"
+    },
+    {
+      "nom": "VARIN",
+      "prenom": "Emmanuel",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    }
+  ]
+}

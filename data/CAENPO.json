@@ -1,0 +1,241 @@
+{
+  "code": "CAENPO",
+  "nom": "CAENPO",
+  "pin": "5078",
+  "brand": "edgard",
+  "rh_to": "ressources-humaines@groupe-edgard.com",
+  "rh_cc": "caenpo@groupe-edgard.com",
+  "periode": {
+    "mois": 5,
+    "annee": 2026
+  },
+  "jours_ouvres": null,
+  "tr": null,
+  "collaborateurs": [
+    {
+      "nom": "BARBEREAU",
+      "prenom": "Sacha",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": "FCO le 13/05/26"
+    },
+    {
+      "nom": "BELLITE",
+      "prenom": "Alexy",
+      "tps": "35",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": "Ct Appr. BTS OL - 09/09/24 au 29/08/26"
+    },
+    {
+      "nom": "BLANCHARD",
+      "prenom": "Louis",
+      "tps": "35",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": "Ct Appr. BTS OL - 16/09/24 au 29/08/26"
+    },
+    {
+      "nom": "CHARLES dit TINARD",
+      "prenom": "Astrid",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "CHÉDOT",
+      "prenom": "Jeanne",
+      "tps": "35",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": "Ct Appr. BTS OL - 01/02/25 au 06/09/27"
+    },
+    {
+      "nom": "DEL'HOMMEAU",
+      "prenom": "Sophie",
+      "tps": "35",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "DESHAYES",
+      "prenom": "Chloé",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "HERREMANS",
+      "prenom": "Stéphane",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "LEMÉE",
+      "prenom": "Estelle",
+      "tps": "35",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "LOMPECH",
+      "prenom": "François",
+      "tps": "41",
+      "transport": "40",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": "REMBOURSEMENT SUR JUSTIFICATIF TRANSPORT"
+    },
+    {
+      "nom": "MARTIN",
+      "prenom": "Marie",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "MILET",
+      "prenom": "Alice",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "NOEL",
+      "prenom": "Sophie",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "PASQUER",
+      "prenom": "Cédric",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "PERRY",
+      "prenom": "Brice",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "PEZET",
+      "prenom": "Camille",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "PORTE",
+      "prenom": "Gatien",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "POUPARD",
+      "prenom": "Franck",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "RABOUILLE",
+      "prenom": "Lise",
+      "tps": "35",
+      "transport": "",
+      "mutuelle": "N",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "SIELER",
+      "prenom": "Gabrielle",
+      "tps": "35",
+      "transport": "",
+      "mutuelle": "N",
+      "tr": "",
+      "commentaires": "Ct Appr. BTS OL du 02/09/24 au 29/08/26"
+    },
+    {
+      "nom": "TETREL",
+      "prenom": "Lucie",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "VAIDIS",
+      "prenom": "Virginie",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "VEAUX",
+      "prenom": "Pauline",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "VORNIERES",
+      "prenom": "Kentin",
+      "tps": "35",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": "Ct Appr. Licence OL du 01/09/24 au 18/08/26"
+    },
+    {
+      "nom": "ZAOUI",
+      "prenom": "Marina",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    }
+  ]
+}

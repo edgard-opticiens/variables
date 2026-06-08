@@ -1,0 +1,241 @@
+{
+  "code": "TURO",
+  "nom": "TURO",
+  "pin": "6750",
+  "brand": "edgard",
+  "rh_to": "ressources-humaines@groupe-edgard.com",
+  "rh_cc": "turo@groupe-edgard.com",
+  "periode": {
+    "mois": 5,
+    "annee": 2026
+  },
+  "jours_ouvres": null,
+  "tr": null,
+  "collaborateurs": [
+    {
+      "nom": "ADRAST",
+      "prenom": "Loula",
+      "tps": "35",
+      "transport": "23",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": "Ct Appr. BTS OL - 02/09/24 au 31/08/26"
+    },
+    {
+      "nom": "ALEIXO",
+      "prenom": "Marie Laure",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "BARDOU",
+      "prenom": "Juliette",
+      "tps": "39",
+      "transport": "",
+      "mutuelle": "N",
+      "tr": "",
+      "commentaires": "CDD du 04/11/25 au 23/05/26"
+    },
+    {
+      "nom": "CARPI",
+      "prenom": "Valentine",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "CHARPENTIER",
+      "prenom": "Samuel",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "CHEVALIER",
+      "prenom": "Nils",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "FOS",
+      "prenom": "Anderson",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "GOGDET",
+      "prenom": "Vincent",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "GUILLAUME",
+      "prenom": "Yann",
+      "tps": "41",
+      "transport": "49",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": "REMBOURSEMENT SUR JUSTIFICATIF TRANSPORT"
+    },
+    {
+      "nom": "IMOBERSTEG",
+      "prenom": "Camille",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "LACOURT",
+      "prenom": "Jules",
+      "tps": "19",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "LE CAPITAINE",
+      "prenom": "Geoffrey",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "",
+      "tr": "",
+      "commentaires": "Emb le 19/05/26"
+    },
+    {
+      "nom": "LHOTELLIER",
+      "prenom": "Paul Emilien",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "LIGEARD",
+      "prenom": "Lucas",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "MOINARD",
+      "prenom": "Franck",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "NOEL",
+      "prenom": "Lucas",
+      "tps": "35",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": "Ct Appr. BTS OL rdbt du 30/08/25 au 28/08/26"
+    },
+    {
+      "nom": "OLAYA",
+      "prenom": "Marie",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "PEREIRA",
+      "prenom": "Guillaume",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "RENOU",
+      "prenom": "Flora",
+      "tps": "36",
+      "transport": "49",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": "REMBOURSEMENT SUR JUSTIFICATIF TRANSPORT"
+    },
+    {
+      "nom": "RIBADOUX",
+      "prenom": "Mattéo",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "RUSTERHOLTZ",
+      "prenom": "Ludovic",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "SAINT-DENIS",
+      "prenom": "Alix",
+      "tps": "35",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "FESNEAU",
+      "prenom": "Adèle",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "0",
+      "commentaires": ""
+    },
+    {
+      "nom": "MARION-PERROT",
+      "prenom": "Clara",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "VAUCELLE",
+      "prenom": "Romane",
+      "tps": "35",
+      "transport": "",
+      "mutuelle": "N",
+      "tr": "",
+      "commentaires": "Ct Appr. BTS OL - 01/08/24 au 31/07/26"
+    }
+  ]
+}

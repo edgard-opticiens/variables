@@ -1,0 +1,79 @@
+{
+  "code": "MANSO",
+  "nom": "MANSO",
+  "pin": "5142",
+  "brand": "edgard",
+  "rh_to": "ressources-humaines@groupe-edgard.com",
+  "rh_cc": "manso@groupe-edgard.com",
+  "periode": {
+    "mois": 5,
+    "annee": 2026
+  },
+  "jours_ouvres": null,
+  "tr": null,
+  "collaborateurs": [
+    {
+      "nom": "BAUDIN",
+      "prenom": "Camille",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "GAUVIN",
+      "prenom": "Léa",
+      "tps": "18h/mois",
+      "transport": "",
+      "mutuelle": "N",
+      "tr": "",
+      "commentaires": "CDD Etudiant du 06/09/25 au 27/06/26\nsamedis travaillés:"
+    },
+    {
+      "nom": "GENDRE",
+      "prenom": "Mégane",
+      "tps": "39",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "JEANNE",
+      "prenom": "Matthieu",
+      "tps": "36",
+      "transport": "17.92",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": "abonnement Vélo 1 an"
+    },
+    {
+      "nom": "LETOURNEUR",
+      "prenom": "Clément",
+      "tps": "40",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "RÉTHORÉ",
+      "prenom": "Clémence",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "VARNIER",
+      "prenom": "Camille",
+      "tps": "41",
+      "transport": "17.92",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": "abonnement Vélo 1 an"
+    }
+  ]
+}

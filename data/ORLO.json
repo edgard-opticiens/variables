@@ -1,0 +1,61 @@
+{
+  "code": "ORLO",
+  "nom": "ORLO",
+  "pin": "4726",
+  "brand": "edgard",
+  "rh_to": "ressources-humaines@groupe-edgard.com",
+  "rh_cc": "orlo@groupe-edgard.com",
+  "periode": {
+    "mois": 5,
+    "annee": 2026
+  },
+  "jours_ouvres": null,
+  "tr": null,
+  "collaborateurs": [
+    {
+      "nom": "ABDESSLAM",
+      "prenom": "Maïna",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "MOREAU",
+      "prenom": "Jade",
+      "tps": "41",
+      "transport": "52",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": "REMBOURSEMENT SUR JUSTIFICATIF TRANSPORT"
+    },
+    {
+      "nom": "ORINEL",
+      "prenom": "Elise",
+      "tps": "41",
+      "transport": "43.32",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": "Vérifier tarif abonnement"
+    },
+    {
+      "nom": "REUGE",
+      "prenom": "Jimmy",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "TAVERNIER",
+      "prenom": "Emmy",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "code": "BORDO",
+  "nom": "BORDO",
+  "pin": "6864",
+  "brand": "edgard",
+  "rh_to": "ressources-humaines@groupe-edgard.com",
+  "rh_cc": "bordo@groupe-edgard.com",
+  "periode": {
+    "mois": 5,
+    "annee": 2026
+  },
+  "jours_ouvres": null,
+  "tr": null,
+  "collaborateurs": [
+    {
+      "nom": "CASSANET",
+      "prenom": "Clémence",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "DU MESNIL-ADELÉE",
+      "prenom": "Emma",
+      "tps": "41",
+      "transport": "49",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": "REMBOURSEMENT SUR JUSTIFICATIF TRANSPORT"
+    },
+    {
+      "nom": "HUGUET",
+      "prenom": "Caroline",
+      "tps": "38h30",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "LUNETEAU",
+      "prenom": "Stéphane",
+      "tps": "38h30",
+      "transport": "49",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": "REMBOURSEMENT SUR JUSTIFICATIF TRANSPORT"
+    },
+    {
+      "nom": "PLEKANEC",
+      "prenom": "Florian",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": "FCO au 16/05/26"
+    },
+    {
+      "nom": "RICHARD",
+      "prenom": "Isabelle",
+      "tps": "39",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "code": "NICEO",
+  "nom": "NICEO",
+  "pin": "5986",
+  "brand": "edgard",
+  "rh_to": "ressources-humaines@groupe-edgard.com",
+  "rh_cc": "niceo@groupe-edgard.com",
+  "periode": {
+    "mois": 5,
+    "annee": 2026
+  },
+  "jours_ouvres": null,
+  "tr": null,
+  "collaborateurs": [
+    {
+      "nom": "DANESHPAJOOH",
+      "prenom": "Ilia",
+      "tps": "35",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": "Ct App. BTS OL du 26/08/25 au 31/07/26"
+    },
+    {
+      "nom": "PUZENAT",
+      "prenom": "Sylvain",
+      "tps": "39",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "RETHORE",
+      "prenom": "Clémence",
+      "tps": "41",
+      "transport": "15",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": "Vérifier tarif abonnement\nTransfert de MARSEILLO au 02/05/26"
+    }
+  ]
+}

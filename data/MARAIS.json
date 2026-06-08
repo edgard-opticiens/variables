@@ -1,0 +1,97 @@
+{
+  "code": "MARAIS",
+  "nom": "MARAIS",
+  "pin": "1165",
+  "brand": "generale",
+  "rh_to": "ressources-humaines@groupe-edgard.com",
+  "rh_cc": "marais@groupe-edgard.com",
+  "periode": {
+    "mois": 5,
+    "annee": 2026
+  },
+  "jours_ouvres": null,
+  "tr": null,
+  "collaborateurs": [
+    {
+      "nom": "BAUDRY (GIRAUDET)",
+      "prenom": "Amandine",
+      "tps": "35",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "BIZOT",
+      "prenom": "Pierre-Emmanuel",
+      "tps": "39",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "BROCHARD",
+      "prenom": "Gladys",
+      "tps": "39",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "GRADASSI",
+      "prenom": "Charlotte",
+      "tps": "39",
+      "transport": "",
+      "mutuelle": "N",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "GRIVET",
+      "prenom": "Amandine",
+      "tps": "35",
+      "transport": "",
+      "mutuelle": "N",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "LEEUWS",
+      "prenom": "Anne Claire",
+      "tps": "39",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "MILCENT",
+      "prenom": "Nolwenn",
+      "tps": "39",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "MOLLÉ",
+      "prenom": "Ophélie",
+      "tps": "39",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "RIFFLET",
+      "prenom": "Julien",
+      "tps": "39",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    }
+  ]
+}

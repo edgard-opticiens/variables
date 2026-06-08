@@ -1,0 +1,79 @@
+{
+  "code": "REIMO",
+  "nom": "REIMO",
+  "pin": "6920",
+  "brand": "edgard",
+  "rh_to": "ressources-humaines@groupe-edgard.com",
+  "rh_cc": "reimo@groupe-edgard.com",
+  "periode": {
+    "mois": 5,
+    "annee": 2026
+  },
+  "jours_ouvres": null,
+  "tr": null,
+  "collaborateurs": [
+    {
+      "nom": "BEGON",
+      "prenom": "Martin",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "CARON",
+      "prenom": "Agathe",
+      "tps": "35",
+      "transport": "",
+      "mutuelle": "N",
+      "tr": "",
+      "commentaires": "Ct App. BACHELOR OL du 01/09/25 au 31/08/26"
+    },
+    {
+      "nom": "DESPEIGNES",
+      "prenom": "Agathe",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "DESPEIGNES",
+      "prenom": "Erwan",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "LUBIS",
+      "prenom": "Romane",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "MASSOT",
+      "prenom": "Alix",
+      "tps": "41",
+      "transport": "17",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": "REMBOURSEMENT SUR JUSTIFICATIF TRANSPORT"
+    },
+    {
+      "nom": "POSSÉMÉ",
+      "prenom": "Adeline",
+      "tps": "36",
+      "transport": "33.33",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": "Vérifier tarif abonnement"
+    }
+  ]
+}

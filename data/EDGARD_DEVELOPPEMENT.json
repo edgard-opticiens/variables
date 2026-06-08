@@ -1,0 +1,142 @@
+{
+  "code": "EDGARD_DEVELOPPEMENT",
+  "nom": "EDGARD DEVELOPPEMENT",
+  "pin": "6780",
+  "brand": "edgard",
+  "rh_to": "ressources-humaines@groupe-edgard.com",
+  "rh_cc": "edgard_developpement@groupe-edgard.com",
+  "periode": {
+    "mois": 5,
+    "annee": 2026
+  },
+  "jours_ouvres": 17,
+  "tr": 17,
+  "collaborateurs": [
+    {
+      "nom": "BOISSEAU",
+      "prenom": "Jonathan",
+      "tps": "39",
+      "transport": "49",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "COSTA NOBRE (WINKLER)",
+      "prenom": "Ludivine",
+      "tps": "Forfait jour",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": "CCP 80% du 01/03/26 au 31/08/26"
+    },
+    {
+      "nom": "de DIEULEVEULT",
+      "prenom": "Baptiste",
+      "tps": "Forfait jour",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "DECLERCK-DESBOIS",
+      "prenom": "Mathieu",
+      "tps": "Forfait jour",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "EL MERZOUKI",
+      "prenom": "Hassena",
+      "tps": "39",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": "TPT 23h (59%) au 01/04/26"
+    },
+    {
+      "nom": "ETIENNE",
+      "prenom": "Arthur",
+      "tps": "35",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "FILLÂTRE",
+      "prenom": "Morgane",
+      "tps": "Forfait jour",
+      "transport": "",
+      "mutuelle": "N",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "HAINGOTIANA",
+      "prenom": "Priscilla",
+      "tps": "37",
+      "transport": "49",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "JOURDAS",
+      "prenom": "Morgane",
+      "tps": "39",
+      "transport": "",
+      "mutuelle": "N",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "LA CROIX",
+      "prenom": "Fabienne",
+      "tps": "Forfait jour",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "LIBRE",
+      "prenom": "Déborah",
+      "tps": "Forfait jour",
+      "transport": "",
+      "mutuelle": "N",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "MARCHAND",
+      "prenom": "Audrey",
+      "tps": "35",
+      "transport": "49",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "MONCHATRE",
+      "prenom": "Pierre",
+      "tps": "39",
+      "transport": "49",
+      "mutuelle": "N",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "STEINDRE",
+      "prenom": "Aurélie",
+      "tps": "31",
+      "transport": "49",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    }
+  ]
+}

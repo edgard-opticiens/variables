@@ -1,0 +1,52 @@
+{
+  "code": "EDGARD_DEV_SERVICE_COM",
+  "nom": "EDGARD DEV. Service COM",
+  "pin": "9945",
+  "brand": "edgard",
+  "rh_to": "ressources-humaines@groupe-edgard.com",
+  "rh_cc": "edgard_dev_service_com@groupe-edgard.com",
+  "periode": {
+    "mois": 5,
+    "annee": 2026
+  },
+  "jours_ouvres": null,
+  "tr": null,
+  "collaborateurs": [
+    {
+      "nom": "DEPLOBIN",
+      "prenom": "Tom",
+      "tps": "39",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "FRANCK",
+      "prenom": "Samuel",
+      "tps": "Forfait\njour",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "JARNOUX",
+      "prenom": "Wendy",
+      "tps": "39",
+      "transport": "54.9",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": "REMBOURSEMENT SUR JUSTIFICATIF TRANSPORT"
+    },
+    {
+      "nom": "PICARD",
+      "prenom": "Lisa",
+      "tps": "39",
+      "transport": "24.9",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": "REMBOURSEMENT SUR JUSTIFICATIF TRANSPORT"
+    }
+  ]
+}

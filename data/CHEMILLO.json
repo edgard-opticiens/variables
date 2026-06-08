@@ -1,0 +1,70 @@
+{
+  "code": "CHEMILLO",
+  "nom": "CHEMILLO",
+  "pin": "3795",
+  "brand": "generale",
+  "rh_to": "ressources-humaines@groupe-edgard.com",
+  "rh_cc": "chemillo@groupe-edgard.com",
+  "periode": {
+    "mois": 5,
+    "annee": 2026
+  },
+  "jours_ouvres": null,
+  "tr": null,
+  "collaborateurs": [
+    {
+      "nom": "BARBOT",
+      "prenom": "Fiona",
+      "tps": "35",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": "Ct Appr. BTS OL - 04/08/25 au 31/07/27"
+    },
+    {
+      "nom": "BOUTET (ANDIVEAU)",
+      "prenom": "Mélody",
+      "tps": "35",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "CAILLAUD",
+      "prenom": "Yohanna",
+      "tps": "35",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "PLET",
+      "prenom": "Charlène",
+      "tps": "39",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "ROUXEL",
+      "prenom": "Amélie",
+      "tps": "39",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "VOLTEAU",
+      "prenom": "Julie",
+      "tps": "39",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    }
+  ]
+}

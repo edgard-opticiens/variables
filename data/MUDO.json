@@ -1,0 +1,61 @@
+{
+  "code": "MUDO",
+  "nom": "MUDO",
+  "pin": "7779",
+  "brand": "generale",
+  "rh_to": "ressources-humaines@groupe-edgard.com",
+  "rh_cc": "mudo@groupe-edgard.com",
+  "periode": {
+    "mois": 5,
+    "annee": 2026
+  },
+  "jours_ouvres": null,
+  "tr": null,
+  "collaborateurs": [
+    {
+      "nom": "DE JULIEN DE VILLENEUVE",
+      "prenom": "Gauvain",
+      "tps": "39",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "DE PINHO",
+      "prenom": "Romance",
+      "tps": "39",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "DORIGNY--LABARRE",
+      "prenom": "Eléa",
+      "tps": "35",
+      "transport": "",
+      "mutuelle": "N",
+      "tr": "",
+      "commentaires": "Ct Appr. Bac Pro OL - 01/08/24 au 31/07/26"
+    },
+    {
+      "nom": "DUGUET",
+      "prenom": "Céline",
+      "tps": "39",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "NAULLEAU",
+      "prenom": "Léa",
+      "tps": "39",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    }
+  ]
+}

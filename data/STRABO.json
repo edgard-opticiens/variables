@@ -1,0 +1,88 @@
+{
+  "code": "STRABO",
+  "nom": "STRABO",
+  "pin": "2749",
+  "brand": "edgard",
+  "rh_to": "ressources-humaines@groupe-edgard.com",
+  "rh_cc": "strabo@groupe-edgard.com",
+  "periode": {
+    "mois": 5,
+    "annee": 2026
+  },
+  "jours_ouvres": null,
+  "tr": null,
+  "collaborateurs": [
+    {
+      "nom": "DUVAL",
+      "prenom": "Thomas",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "LE GALL",
+      "prenom": "Pierre",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "METZ",
+      "prenom": "Sébastien",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "MERCUSOT",
+      "prenom": "Victorine",
+      "tps": "36",
+      "transport": "",
+      "mutuelle": "N",
+      "tr": "",
+      "commentaires": "CDD du 22/04/26 au 30/05/2026"
+    },
+    {
+      "nom": "MOTSCH",
+      "prenom": "Elise",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "OLTZ",
+      "prenom": "Sophie",
+      "tps": "41",
+      "transport": "56",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": "JUSTIFICATIF TRANSPORT A FOURNIR"
+    },
+    {
+      "nom": "STRAUSS",
+      "prenom": "Agathe",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "THURNREITER",
+      "prenom": "Lara",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": "FCO le 09/05/26"
+    }
+  ]
+}

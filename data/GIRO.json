@@ -1,0 +1,79 @@
+{
+  "code": "GIRO",
+  "nom": "GIRO",
+  "pin": "7935",
+  "brand": "edgard",
+  "rh_to": "ressources-humaines@groupe-edgard.com",
+  "rh_cc": "giro@groupe-edgard.com",
+  "periode": {
+    "mois": 5,
+    "annee": 2026
+  },
+  "jours_ouvres": null,
+  "tr": null,
+  "collaborateurs": [
+    {
+      "nom": "BŒUF",
+      "prenom": "Anaïs",
+      "tps": "41",
+      "transport": "20.8",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": "Vérifier tarif abonnement"
+    },
+    {
+      "nom": "DUBOS",
+      "prenom": "Caroline",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "GASCARD",
+      "prenom": "Jérôme",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "N",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "JACQUES",
+      "prenom": "Solène",
+      "tps": "41",
+      "transport": "21.4",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": "Vérifier tarif abonnement"
+    },
+    {
+      "nom": "LANGLADE",
+      "prenom": "Sylvain",
+      "tps": "41",
+      "transport": "54.4",
+      "mutuelle": "N",
+      "tr": "",
+      "commentaires": "Vérifier tarif abonnement"
+    },
+    {
+      "nom": "LIHOREAU",
+      "prenom": "Mathys",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "PEDEFER",
+      "prenom": "Romain",
+      "tps": "41",
+      "transport": "45.8",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": "Vérifier tarif abonnement"
+    }
+  ]
+}

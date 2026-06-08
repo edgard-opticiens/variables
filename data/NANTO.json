@@ -1,0 +1,115 @@
+{
+  "code": "NANTO",
+  "nom": "NANTO",
+  "pin": "8694",
+  "brand": "edgard",
+  "rh_to": "ressources-humaines@groupe-edgard.com",
+  "rh_cc": "nanto@groupe-edgard.com",
+  "periode": {
+    "mois": 5,
+    "annee": 2026
+  },
+  "jours_ouvres": null,
+  "tr": null,
+  "collaborateurs": [
+    {
+      "nom": "BARDIN",
+      "prenom": "Julien",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "N",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "DENIS",
+      "prenom": "Franck",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "DUPÉ",
+      "prenom": "Maëlle",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "N",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "GANTIER",
+      "prenom": "Sabrina",
+      "tps": "41",
+      "transport": "54.9",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": "JUSTIFICATIF TRANSPORT A FOURNIR"
+    },
+    {
+      "nom": "GUILLOT",
+      "prenom": "Jacky",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "LAMARRE",
+      "prenom": "Sara",
+      "tps": "41",
+      "transport": "54.9",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": "JUSTIFICATIF TRANSPORT A FOURNIR"
+    },
+    {
+      "nom": "MENENDEZ",
+      "prenom": "Margot",
+      "tps": "35",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": "Ct Appr. LPO - 01/09/25 au 31/08/26"
+    },
+    {
+      "nom": "MERCIER",
+      "prenom": "Maude",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "MORINEAU",
+      "prenom": "Mathilde",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "RESENDE",
+      "prenom": "Paloma",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "VIRIOT",
+      "prenom": "Jennifer",
+      "tps": "41",
+      "transport": "53.9",
+      "mutuelle": "O",
+      "tr": "+1",
+      "commentaires": "JUSTIFICATIF TRANSPORT A FOURNIR\nTR régul 05/26"
+    }
+  ]
+}

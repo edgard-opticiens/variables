@@ -1,0 +1,106 @@
+{
+  "code": "ECUME",
+  "nom": "ECUME",
+  "pin": "3087",
+  "brand": "generale",
+  "rh_to": "ressources-humaines@groupe-edgard.com",
+  "rh_cc": "ecume@groupe-edgard.com",
+  "periode": {
+    "mois": 5,
+    "annee": 2026
+  },
+  "jours_ouvres": null,
+  "tr": null,
+  "collaborateurs": [
+    {
+      "nom": "BRECK",
+      "prenom": "Karen",
+      "tps": "39",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "COMTE",
+      "prenom": "Annabelle",
+      "tps": "39",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "DAVID",
+      "prenom": "Camille",
+      "tps": "31",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": "PTP DU 25/02/26 AU 11/09/26"
+    },
+    {
+      "nom": "DOGUET",
+      "prenom": "Corinne",
+      "tps": "39",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "HERVE",
+      "prenom": "Héloïse",
+      "tps": "39",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "LOISEAU (DAMEZ)",
+      "prenom": "Juliette",
+      "tps": "35",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "PIFFETEAU",
+      "prenom": "Aurélie",
+      "tps": "35",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "PINARD",
+      "prenom": "Mélanie",
+      "tps": "39",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "RELET",
+      "prenom": "Stéphanie",
+      "tps": "27",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "STEVANT",
+      "prenom": "Jean-Baptiste",
+      "tps": "39",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    }
+  ]
+}

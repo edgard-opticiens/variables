@@ -1,0 +1,52 @@
+{
+  "code": "NANCEO",
+  "nom": "NANCEO",
+  "pin": "2946",
+  "brand": "edgard",
+  "rh_to": "ressources-humaines@groupe-edgard.com",
+  "rh_cc": "nanceo@groupe-edgard.com",
+  "periode": {
+    "mois": 5,
+    "annee": 2026
+  },
+  "jours_ouvres": null,
+  "tr": null,
+  "collaborateurs": [
+    {
+      "nom": "BOUTOLLEAU",
+      "prenom": "Camille",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "BURTÉ",
+      "prenom": "Cécile",
+      "tps": "36",
+      "transport": "",
+      "mutuelle": "?",
+      "tr": "",
+      "commentaires": "CDD du 10/06/26 au 31/12/26"
+    },
+    {
+      "nom": "HOFFMANN",
+      "prenom": "Nicolas",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "MASSICOT",
+      "prenom": "Hugo",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    }
+  ]
+}

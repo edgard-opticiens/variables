@@ -1,0 +1,106 @@
+{
+  "code": "ANGO",
+  "nom": "ANGO",
+  "pin": "3653",
+  "brand": "edgard",
+  "rh_to": "ressources-humaines@groupe-edgard.com",
+  "rh_cc": "ango@groupe-edgard.com",
+  "periode": {
+    "mois": 5,
+    "annee": 2026
+  },
+  "jours_ouvres": null,
+  "tr": null,
+  "collaborateurs": [
+    {
+      "nom": "ALUSSE",
+      "prenom": "Cédyjo",
+      "tps": "31",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "BRISMONTIER",
+      "prenom": "Jeanne",
+      "tps": "9",
+      "transport": "",
+      "mutuelle": "N",
+      "tr": "",
+      "commentaires": "CDD Etudiant du 06/09/25 au 27/06/26"
+    },
+    {
+      "nom": "CHERBUY",
+      "prenom": "Rodolphe",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "DUBILLAUD",
+      "prenom": "Marie-Lou",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "DUREL",
+      "prenom": "Bertille",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "ECHALIER",
+      "prenom": "Thibault",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "FONTENEAU",
+      "prenom": "Camille",
+      "tps": "27",
+      "transport": "",
+      "mutuelle": "N",
+      "tr": "",
+      "commentaires": "CDD Etudiant du 01/07/25 au 26/07/25"
+    },
+    {
+      "nom": "FONTENEAU",
+      "prenom": "Camille",
+      "tps": "35",
+      "transport": "",
+      "mutuelle": "N",
+      "tr": "",
+      "commentaires": "Ct Appr. Licence OL du 01/09/24 au 29/08/26"
+    },
+    {
+      "nom": "JACQUOT",
+      "prenom": "Maëlle",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "SOL",
+      "prenom": "Julien",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    }
+  ]
+}

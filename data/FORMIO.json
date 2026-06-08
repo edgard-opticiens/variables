@@ -1,0 +1,88 @@
+{
+  "code": "FORMIO",
+  "nom": "FORMIO",
+  "pin": "7930",
+  "brand": "generale",
+  "rh_to": "ressources-humaines@groupe-edgard.com",
+  "rh_cc": "formio@groupe-edgard.com",
+  "periode": {
+    "mois": 5,
+    "annee": 2026
+  },
+  "jours_ouvres": null,
+  "tr": null,
+  "collaborateurs": [
+    {
+      "nom": "BOULDRON",
+      "prenom": "Clémence",
+      "tps": "35",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "DAVID",
+      "prenom": "Maud",
+      "tps": "39",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "FOUQUET",
+      "prenom": "Florence",
+      "tps": "19.5",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "GUITTARD",
+      "prenom": "Romain",
+      "tps": "39",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "PERSÉVÉRANTÉ",
+      "prenom": "Christine",
+      "tps": "35",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "0",
+      "commentaires": "1 CP sur 04/26: 7,50h\n17 CP sur 05/26: 151,67\nFCO le 31/05/26"
+    },
+    {
+      "nom": "PETIT",
+      "prenom": "Jérôme",
+      "tps": "39",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "SOULARD",
+      "prenom": "Jessica",
+      "tps": "39",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "SOULARD",
+      "prenom": "Sabrina",
+      "tps": "39",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "0",
+      "commentaires": ""
+    }
+  ]
+}
