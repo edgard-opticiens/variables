@@ -284,7 +284,7 @@ let prevKey = null;
 const EMBEDDED_DEMO = {
   code:"BORDO", nom:"BORDO", pin:"1234",
   rh_to:"ressources-humaines@groupe-edgard.com", rh_cc:"bordo@groupe-edgard.com",
-  periode:{mois:5,annee:2026}, jours_ouvres:null, tr:null, brand:"edgard",
+  periode:{mois:5,annee:2026}, jours_ouvres:null, tr:null, brand:"edgard", semaine:"lun-sam",
   collaborateurs:[
     {nom:"CASSANET",prenom:"Clémence",tps:"41",transport:"",mutuelle:"O",tr:"",commentaires:""},
     {nom:"DU MESNIL-ADELÉE",prenom:"Emma",tps:"41",transport:"49",mutuelle:"O",tr:"",commentaires:"REMBOURSEMENT SUR JUSTIFICATIF TRANSPORT"},
@@ -299,6 +299,47 @@ const MOTIFS = ["","CP","CSS","AM","MAT","PAT","PAR","AT","EVT","ANR"];
 const MOIS = ["JANVIER","FÉVRIER","MARS","AVRIL","MAI","JUIN","JUILLET","AOÛT","SEPTEMBRE","OCTOBRE","NOVEMBRE","DÉCEMBRE"];
 
 function blankAbs(){ return {debut:"",fin:"",joursCP:"",motif:"",heures:""}; }
+
+/* ===== Calcul automatique des jours de CP à décompter =====
+   Règle : la date de fin = date de reprise (non comptée). On compte les jours
+   travaillés entre début (inclus) et fin (exclu), hors dimanches et jours fériés.
+   - magasins "lun-sam" : samedi compté (semaine complète = 6 j)
+   - FORMIO / EDGARD DEV "lun-ven" : samedi non travaillé (semaine = 5 j),
+     mais un jour férié tombant le samedi retire quand même 1 jour. */
+function _pad(n){ return String(n).padStart(2,"0"); }
+function _iso(d){ return `${d.getFullYear()}-${_pad(d.getMonth()+1)}-${_pad(d.getDate())}`; }
+function _easter(y){ const a=y%19,b=Math.floor(y/100),c=y%100,d=Math.floor(b/4),e=b%4,f=Math.floor((b+8)/25),g=Math.floor((b-f+1)/3),h=(19*a+b-d-g+15)%30,i=Math.floor(c/4),k=c%4,l=(32+2*e+2*i-h-k)%7,m=Math.floor((a+11*h+22*l)/451),mo=Math.floor((h+l-7*m+114)/31),da=((h+l-7*m+114)%31)+1; return new Date(y,mo-1,da); }
+function _frHolidays(y){ const s=new Set(); [[1,1],[5,1],[5,8],[7,14],[8,15],[11,1],[11,11],[12,25]].forEach(([m,d])=>s.add(`${y}-${_pad(m)}-${_pad(d)}`)); const e=_easter(y); [1,39,50].forEach(o=>{ const x=new Date(e); x.setDate(x.getDate()+o); s.add(_iso(x)); }); return s; }
+function _parseISO(s){ if(!s) return null; const p=s.split("-").map(Number); return p.length===3 ? new Date(p[0],p[1]-1,p[2]) : null; }
+function countCP(startISO, endISO, semaine, alsace){
+  const start=_parseISO(startISO), end=_parseISO(endISO);
+  if(!start || !end || !(end>start)) return "";
+  const H=new Set([..._frHolidays(start.getFullYear()), ..._frHolidays(end.getFullYear())]);
+  if(alsace){ // Alsace-Moselle : Vendredi Saint + 26 décembre
+    [start.getFullYear(), end.getFullYear()].forEach(y=>{
+      const vs=new Date(_easter(y)); vs.setDate(vs.getDate()-2); H.add(_iso(vs)); H.add(`${y}-12-26`);
+    });
+  }
+  let c=0;
+  for(let d=new Date(start); d<end; d.setDate(d.getDate()+1)){
+    const wd=d.getDay(), hol=H.has(_iso(d));
+    if(semaine==="lun-ven"){
+      if(wd>=1 && wd<=5){ if(!hol) c++; }
+      else if(wd===6){ if(hol) c--; }
+    } else {
+      if(wd!==0 && !hol) c++;
+    }
+  }
+  return String(Math.max(0,c));
+}
+function maybeComputeCP(g,a){
+  const ab = state[g].absences[a];
+  if(ab.motif==="CP" && ab.debut && ab.fin){
+    ab.joursCP = countCP(ab.debut, ab.fin, (STORE && STORE.semaine) || "lun-sam", STORE && STORE.alsace);
+    const inp = tbody.querySelector(`input[data-g="${g}"][data-a="${a}"][data-f="joursCP"]`);
+    if(inp) inp.value = ab.joursCP;
+  }
+}
 let state = [];
 let dirSig = null;
 
@@ -468,6 +509,9 @@ tbody.addEventListener("input", e=>{
   const t = e.target;
   if(t.dataset.f!==undefined && t.dataset.g!==undefined){
     state[t.dataset.g].absences[t.dataset.a][t.dataset.f] = t.value;
+    if(t.dataset.f==="debut" || t.dataset.f==="fin" || t.dataset.f==="motif"){
+      maybeComputeCP(+t.dataset.g, +t.dataset.a);
+    }
   } else if(t.dataset.emp!==undefined){
     state[t.dataset.emp][t.dataset.f] = t.value;
   }
