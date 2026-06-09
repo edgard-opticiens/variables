@@ -3,6 +3,8 @@
   "nom": "TURO",
   "pin": "6750",
   "brand": "edgard",
+  "semaine": "lun-sam",
+  "alsace": false,
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "turo@groupe-edgard.com",
   "periode": {

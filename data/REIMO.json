@@ -3,6 +3,8 @@
   "nom": "REIMO",
   "pin": "6920",
   "brand": "edgard",
+  "semaine": "lun-sam",
+  "alsace": false,
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "reimo@groupe-edgard.com",
   "periode": {

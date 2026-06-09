@@ -3,6 +3,8 @@
   "nom": "STRABO",
   "pin": "2749",
   "brand": "edgard",
+  "semaine": "lun-sam",
+  "alsace": true,
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "strabo@groupe-edgard.com",
   "periode": {

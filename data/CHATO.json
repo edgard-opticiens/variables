@@ -3,6 +3,8 @@
   "nom": "CHATO",
   "pin": "6007",
   "brand": "generale",
+  "semaine": "lun-sam",
+  "alsace": false,
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "chato@groupe-edgard.com",
   "periode": {

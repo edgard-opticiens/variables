@@ -3,6 +3,8 @@
   "nom": "DUNES",
   "pin": "8843",
   "brand": "generale",
+  "semaine": "lun-sam",
+  "alsace": false,
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "dunes@groupe-edgard.com",
   "periode": {

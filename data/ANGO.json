@@ -3,6 +3,8 @@
   "nom": "ANGO",
   "pin": "3653",
   "brand": "edgard",
+  "semaine": "lun-sam",
+  "alsace": false,
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "ango@groupe-edgard.com",
   "periode": {

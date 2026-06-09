@@ -3,6 +3,8 @@
   "nom": "JISAM",
   "pin": "7152",
   "brand": "edgard",
+  "semaine": "lun-sam",
+  "alsace": false,
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "jisam@groupe-edgard.com",
   "periode": {

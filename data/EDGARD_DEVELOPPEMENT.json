@@ -3,6 +3,8 @@
   "nom": "EDGARD DEVELOPPEMENT",
   "pin": "6780",
   "brand": "edgard",
+  "semaine": "lun-ven",
+  "alsace": false,
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "edgard_developpement@groupe-edgard.com",
   "periode": {
