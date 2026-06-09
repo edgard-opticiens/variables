@@ -3,8 +3,6 @@
   "nom": "NIORTO",
   "pin": "5785",
   "brand": "generale",
-  "semaine": "lun-sam",
-  "alsace": false,
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "niorto@groupe-edgard.com",
   "periode": {

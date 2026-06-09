@@ -3,8 +3,6 @@
   "nom": "EDGARD DEV. Service COM",
   "pin": "9945",
   "brand": "edgard",
-  "semaine": "lun-ven",
-  "alsace": false,
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "edgard_dev_service_com@groupe-edgard.com",
   "periode": {

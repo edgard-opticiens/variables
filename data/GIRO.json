@@ -3,8 +3,6 @@
   "nom": "GIRO",
   "pin": "7935",
   "brand": "edgard",
-  "semaine": "lun-sam",
-  "alsace": false,
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "giro@groupe-edgard.com",
   "periode": {

@@ -3,8 +3,6 @@
   "nom": "MUDO",
   "pin": "7779",
   "brand": "generale",
-  "semaine": "lun-sam",
-  "alsace": false,
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "mudo@groupe-edgard.com",
   "periode": {

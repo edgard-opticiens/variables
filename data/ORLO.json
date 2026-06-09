@@ -3,8 +3,6 @@
   "nom": "ORLO",
   "pin": "4726",
   "brand": "edgard",
-  "semaine": "lun-sam",
-  "alsace": false,
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "orlo@groupe-edgard.com",
   "periode": {

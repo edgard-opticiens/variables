@@ -3,8 +3,6 @@
   "nom": "LYONO",
   "pin": "7411",
   "brand": "edgard",
-  "semaine": "lun-sam",
-  "alsace": false,
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "lyono@groupe-edgard.com",
   "periode": {

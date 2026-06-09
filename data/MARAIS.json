@@ -3,8 +3,6 @@
   "nom": "MARAIS",
   "pin": "1165",
   "brand": "generale",
-  "semaine": "lun-sam",
-  "alsace": false,
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "marais@groupe-edgard.com",
   "periode": {

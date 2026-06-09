@@ -3,8 +3,6 @@
   "nom": "NICEO",
   "pin": "5986",
   "brand": "edgard",
-  "semaine": "lun-sam",
-  "alsace": false,
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "niceo@groupe-edgard.com",
   "periode": {

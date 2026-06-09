@@ -3,8 +3,6 @@
   "nom": "CAENPO",
   "pin": "5078",
   "brand": "edgard",
-  "semaine": "lun-sam",
-  "alsace": false,
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "caenpo@groupe-edgard.com",
   "periode": {
