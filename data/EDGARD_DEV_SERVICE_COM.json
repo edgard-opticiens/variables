@@ -24,7 +24,7 @@
     {
       "nom": "FRANCK",
       "prenom": "Samuel",
-      "tps": "Forfait\njour",
+      "tps": "Forfait\r\njour",
       "transport": "",
       "mutuelle": "O",
       "tr": "",
