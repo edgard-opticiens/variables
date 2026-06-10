@@ -191,9 +191,11 @@ body.modal-open{overflow:hidden;position:fixed;width:100%}
         <div class="head-fields">
           <div class="field"><label>Mois</label><select id="mois" disabled></select></div>
           <div class="field"><label>Année</label><input id="annee" type="number" value="2026" disabled></div>
+          <div class="field"><label>Historique</label><select id="hist" title="Rouvrir un mois précédent pour finir les signatures"></select></div>
           <button class="reset-btn" id="reset-btn" title="Effacer la saisie de ce magasin">↺ Réinitialiser</button>
         </div>
       </div>
+      <div id="hist-banner" style="display:none;margin-top:12px;padding:11px 14px;border-radius:10px;background:#fff4d6;border:1.5px solid #e0c060;color:#7a5a10;font-size:13.5px;font-weight:600;line-height:1.5"></div>
     </div>
 
     <div class="table-wrap">
@@ -417,6 +419,72 @@ function onPeriodChange(){
 }
 moisSel.addEventListener("change", onPeriodChange);
 $("annee").addEventListener("change", onPeriodChange);
+
+/* =================================================================
+   HISTORIQUE — rouvrir un mois précédent (sauvegardé sur l'appareil)
+   pour terminer les signatures, sans toucher au mois en cours.
+   ================================================================= */
+const MOISNOM=["janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"];
+function pad2(n){ return String(n).padStart(2,"0"); }
+let currentPer = null;            // "YYYY-MM" du mois en cours (issu du JSON)
+function perOf(){ return `${$("annee").value}-${pad2(+moisSel.value+1)}`; }
+function perLabel(per){ const [y,m]=per.split("-"); return `${MOISNOM[+m-1]} ${y}`; }
+function listSavedPeriods(){
+  const pre=`edgard_var_${STORE.code}_`, arr=[];
+  for(let i=0;i<localStorage.length;i++){ const k=localStorage.key(i); if(k&&k.indexOf(pre)===0) arr.push(k.slice(pre.length)); }
+  return arr.sort().reverse();
+}
+function refreshHist(){
+  const sel=$("hist"); if(!sel) return;
+  const cur=currentPer||perOf();
+  let opts=`<option value="${cur}">${perLabel(cur)} — mois en cours</option>`;
+  listSavedPeriods().filter(p=>p!==cur).forEach(p=>{ opts+=`<option value="${p}">${perLabel(p)} (mois précédent)</option>`; });
+  sel.innerHTML=opts; sel.value=cur;
+}
+function showHistBanner(per){
+  const b=$("hist-banner"); if(!b) return;
+  b.style.display="block";
+  b.innerHTML=`Vous consultez la fiche de <b>${perLabel(per)}</b> (mois précédent). Vous pouvez la compléter, la faire signer et l'envoyer aux RH. <a href="#" id="hist-back" style="color:#7a5a10;text-decoration:underline">Revenir au mois en cours</a>`;
+  $("hist-back").onclick=e=>{ e.preventDefault(); backToCurrent(); };
+}
+function hideHistBanner(){ const b=$("hist-banner"); if(b){ b.style.display="none"; } }
+function loadSnapshot(per){
+  if(prevKey) saveTo(prevKey);
+  const [y,m]=per.split("-");
+  moisSel.value=String(+m-1); $("annee").value=y;
+  const key=periodKey();
+  state=freshState(); dirSig=null;
+  $("dir-sign").innerHTML="Toucher pour signer"; $("dir-nom").value=""; $("dir-prenom").value="";
+  try{
+    const raw=localStorage.getItem(key);
+    if(raw){
+      const d=JSON.parse(raw);
+      if(d.state && d.state.length){
+        state=d.state.map(e=>({
+          nom:e.nom, prenom:e.prenom, tps:e.tps||"", transport:e.transport||"",
+          mutuelle:e.mutuelle||"", tr:e.tr||"", commentaires:e.commentaires||"",
+          sig:e.sig||null, absences:(e.absences&&e.absences.length)?e.absences:[blankAbs()]
+        }));
+      }
+      dirSig=d.dirSig||null;
+      if(dirSig) $("dir-sign").innerHTML=`<img src="${dirSig}">`;
+      if(d.dirNom!=null) $("dir-nom").value=d.dirNom;
+      if(d.dirPrenom!=null) $("dir-prenom").value=d.dirPrenom;
+    }
+  }catch(e){}
+  prevKey=key; renderTable(); updateChecklist(); showHistBanner(per);
+}
+function backToCurrent(){
+  if(prevKey) saveTo(prevKey);
+  if(STORE.periode && STORE.periode.mois!=null){ moisSel.value=STORE.periode.mois; $("annee").value=STORE.periode.annee||now.getFullYear(); }
+  else { moisSel.value=now.getMonth(); $("annee").value=now.getFullYear(); }
+  loadPeriod(); prevKey=periodKey(); hideHistBanner();
+  const sel=$("hist"); if(sel) sel.value=currentPer;
+}
+$("hist").addEventListener("change", e=>{
+  const per=e.target.value;
+  if(per===currentPer) backToCurrent(); else loadSnapshot(per);
+});
 
 /* =================================================================
    RENDU DU TABLEAU (rowspan : nom/transport/signature au niveau salarié,
@@ -719,7 +787,9 @@ function startApp(){
     $("annee").value = now.getFullYear();
   }
   prevKey = periodKey();
+  currentPer = perOf();
   loadPeriod();
+  refreshHist();
 }
 bootstrap();
 </script>
