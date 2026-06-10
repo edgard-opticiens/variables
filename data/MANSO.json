@@ -28,7 +28,7 @@
       "transport": "",
       "mutuelle": "N",
       "tr": "",
-      "commentaires": "CDD Etudiant du 06/09/25 au 27/06/26\r\nsamedis travaillés:"
+      "commentaires": "CDD Etudiant du 06/09/25 au 27/06/26\nsamedis travaillés:"
     },
     {
       "nom": "GENDRE",
@@ -52,6 +52,15 @@
       "nom": "LETOURNEUR",
       "prenom": "Clément",
       "tps": "40",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "RÉTHORÉ",
+      "prenom": "Clémence",
+      "tps": "41",
       "transport": "",
       "mutuelle": "O",
       "tr": "",

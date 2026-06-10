@@ -49,6 +49,15 @@
       "commentaires": ""
     },
     {
+      "nom": "PERSÉVÉRANTÉ",
+      "prenom": "Christine",
+      "tps": "35",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "0",
+      "commentaires": "1 CP sur 04/26: 7,50h\n17 CP sur 05/26: 151,67\nFCO le 31/05/26"
+    },
+    {
       "nom": "PETIT",
       "prenom": "Jérôme",
       "tps": "39",
@@ -72,7 +81,7 @@
       "tps": "39",
       "transport": "",
       "mutuelle": "O",
-      "tr": "",
+      "tr": "0",
       "commentaires": ""
     }
   ]

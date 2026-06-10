@@ -9,7 +9,7 @@
     "mois": 5,
     "annee": 2026
   },
-  "jours_ouvres": null,
+  "jours_ouvres": 17,
   "tr": 17,
   "collaborateurs": [
     {

@@ -31,6 +31,15 @@
       "commentaires": ""
     },
     {
+      "nom": "BARDOU",
+      "prenom": "Juliette",
+      "tps": "39",
+      "transport": "",
+      "mutuelle": "N",
+      "tr": "",
+      "commentaires": "CDD du 04/11/25 au 23/05/26"
+    },
+    {
       "nom": "CARPI",
       "prenom": "Valentine",
       "tps": "41",
@@ -109,7 +118,7 @@
       "transport": "",
       "mutuelle": "",
       "tr": "",
-      "commentaires": ""
+      "commentaires": "Emb le 19/05/26"
     },
     {
       "nom": "LHOTELLIER",
