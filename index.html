@@ -437,8 +437,10 @@ function listSavedPeriods(){
 function refreshHist(){
   const sel=$("hist"); if(!sel) return;
   const cur=currentPer||perOf();
+  const past=listSavedPeriods().filter(p=>p!==cur);
   let opts=`<option value="${cur}">${perLabel(cur)} — mois en cours</option>`;
-  listSavedPeriods().filter(p=>p!==cur).forEach(p=>{ opts+=`<option value="${p}">${perLabel(p)} (mois précédent)</option>`; });
+  if(past.length){ past.forEach(p=>{ opts+=`<option value="${p}">${perLabel(p)} (mois précédent)</option>`; }); }
+  else { opts+=`<option value="" disabled>— aucun mois précédent sur cet appareil —</option>`; }
   sel.innerHTML=opts; sel.value=cur;
 }
 function showHistBanner(per){
