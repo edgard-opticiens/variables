@@ -750,17 +750,15 @@ async function generatePDF(){
    ================================================================= */
 function openMail(){
   const moisTxt=MOIS[+moisSel.value], annee=$("annee").value;
-  const sujet=`Variables de paie – ${STORE.nom} – ${moisTxt} ${annee}`;
+  const moisMin=moisTxt.toLowerCase();
+  const total=state.length, sc=sigCount();
+  const sujet=`${STORE.nom} – Variable ${moisTxt} ${annee} – ${sc}/${total} signés`;
   const corps=
-`Bonjour,
+`Bonjour les RH,
 
-Veuillez trouver ci-joint les variables de paie du magasin ${STORE.nom} pour ${moisTxt} ${annee}.
+Vous trouverez ci-joint la variable du mois de ${moisMin} ${annee}
 
->>> Le PDF vient d'etre telecharge sur cet appareil : merci de le JOINDRE a cet e-mail avant l'envoi.
-
-Cordialement,
-${$("dir-prenom").value} ${$("dir-nom").value}
-Responsable - ${STORE.nom}`;
+Excellente journée`;
   const url=`mailto:${encodeURIComponent(STORE.rh_to)}?cc=${encodeURIComponent(STORE.rh_cc)}&subject=${encodeURIComponent(sujet)}&body=${encodeURIComponent(corps)}`;
   const a=document.createElement("a"); a.href=url; a.style.display="none";
   document.body.appendChild(a); a.click(); a.remove();
