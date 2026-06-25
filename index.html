@@ -661,7 +661,7 @@ function buildPrintable(sigPng){
       h+=`<td style="${Babs}">${esc(fmtDate(a.debut))}</td><td style="${Babs}">${esc(fmtDate(a.fin))}</td><td style="${Babs}text-align:center">${esc(a.joursCP)}</td><td style="${Babs}text-align:center;font-weight:700">${esc(a.motif)}</td><td style="${Babs}text-align:center">${esc(a.heures)}</td>`;
       if(ai===0){
         const sp=sigPng.collab[gi];
-        h+=`<td rowspan="${k}" style="${B}text-align:center">${esc(c.transport)}</td><td rowspan="${k}" style="${B}text-align:center">${esc(c.mutuelle)}</td><td rowspan="${k}" style="${B}text-align:center">${esc(c.tr)}</td><td rowspan="${k}" style="${B}">${esc(c.commentaires)}</td><td rowspan="${k}" style="${B}text-align:center">${sp?`<img src="${sp}" style="height:32px;max-width:96px">`:""}</td>`;
+        h+=`<td rowspan="${k}" style="${B}text-align:center">${esc(c.transport)}</td><td rowspan="${k}" style="${B}text-align:center">${esc(c.mutuelle)}</td><td rowspan="${k}" style="${B}text-align:center">${esc(c.tr)}</td><td rowspan="${k}" style="${B}width:185px;white-space:normal;word-break:break-word;overflow-wrap:anywhere;vertical-align:top">${esc(c.commentaires)}</td><td rowspan="${k}" style="${B}text-align:center">${sp?`<img src="${sp}" style="height:32px;max-width:96px">`:""}</td>`;
       }
       h+="</tr>"; return h;
     }).join("");
