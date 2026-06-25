@@ -651,7 +651,7 @@ function buildPrintable(sigPng){
   const dirNom=$("dir-nom").value, dirPrenom=$("dir-prenom").value;
   const B="border:1px solid #d9d2c4;padding:6px 6px;word-break:break-word;overflow-wrap:anywhere;";
   const Babs="border:1px solid #d9d2c4;padding:28px 6px;word-break:break-word;overflow-wrap:anywhere;";
-  const TH="padding:6px 4px;font-size:9.5px;font-weight:700;vertical-align:bottom;word-break:break-word;line-height:1.15;";
+  const TH="padding:5px 4px;font-size:8px;font-weight:700;vertical-align:bottom;overflow-wrap:break-word;line-height:1.2;";
   const rows = state.map((c,gi)=>{
     const k=c.absences.length;
     return c.absences.map((a,ai)=>{
@@ -678,8 +678,8 @@ function buildPrintable(sigPng){
         <div style="font-size:19px;font-weight:800">${moisTxt} ${esc(annee)}</div>
       </div>
     </div>
-    <table style="border-collapse:collapse;width:1120px;table-layout:fixed;font-size:11px">
-      <colgroup><col style="width:95px"><col style="width:80px"><col style="width:58px"><col style="width:92px"><col style="width:92px"><col style="width:54px"><col style="width:58px"><col style="width:70px"><col style="width:74px"><col style="width:42px"><col style="width:62px"><col style="width:248px"><col style="width:95px"></colgroup>
+    <table style="border-collapse:collapse;width:100%;table-layout:fixed;font-size:11px">
+      <colgroup><col style="width:8%"><col style="width:6.5%"><col style="width:5.5%"><col style="width:7.5%"><col style="width:7.5%"><col style="width:6%"><col style="width:5.5%"><col style="width:6%"><col style="width:6.5%"><col style="width:5.5%"><col style="width:5.5%"><col style="width:22.5%"><col style="width:7.5%"></colgroup>
       <thead>
         <tr style="font-size:9px;font-weight:700">
           <th colspan="3" style="border:1px solid #d9d2c4;padding:3px"></th>
