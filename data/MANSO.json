@@ -6,7 +6,7 @@
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "manso@groupe-edgard.com",
   "periode": {
-    "mois": 5,
+    "mois": 6,
     "annee": 2026
   },
   "jours_ouvres": null,
@@ -24,11 +24,11 @@
     {
       "nom": "GAUVIN",
       "prenom": "Léa",
-      "tps": "18h/mois",
+      "tps": "41",
       "transport": "",
       "mutuelle": "N",
       "tr": "",
-      "commentaires": "CDD Etudiant du 06/09/25 au 27/06/26\nsamedis travaillés:"
+      "commentaires": "CDD Etudiant du 06/09/25 au 27/06/26 prolong jusqu'au 29/08/26"
     },
     {
       "nom": "GENDRE",
@@ -52,15 +52,6 @@
       "nom": "LETOURNEUR",
       "prenom": "Clément",
       "tps": "40",
-      "transport": "",
-      "mutuelle": "O",
-      "tr": "",
-      "commentaires": ""
-    },
-    {
-      "nom": "RÉTHORÉ",
-      "prenom": "Clémence",
-      "tps": "41",
       "transport": "",
       "mutuelle": "O",
       "tr": "",

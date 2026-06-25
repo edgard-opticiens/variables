@@ -6,7 +6,7 @@
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "bordo@groupe-edgard.com",
   "periode": {
-    "mois": 5,
+    "mois": 6,
     "annee": 2026
   },
   "jours_ouvres": null,
@@ -31,15 +31,6 @@
       "commentaires": "REMBOURSEMENT SUR JUSTIFICATIF TRANSPORT"
     },
     {
-      "nom": "HUGUET",
-      "prenom": "Caroline",
-      "tps": "38h30",
-      "transport": "",
-      "mutuelle": "O",
-      "tr": "",
-      "commentaires": ""
-    },
-    {
       "nom": "LUNETEAU",
       "prenom": "Stéphane",
       "tps": "38h30",
@@ -47,15 +38,6 @@
       "mutuelle": "O",
       "tr": "",
       "commentaires": "REMBOURSEMENT SUR JUSTIFICATIF TRANSPORT"
-    },
-    {
-      "nom": "PLEKANEC",
-      "prenom": "Florian",
-      "tps": "41",
-      "transport": "",
-      "mutuelle": "O",
-      "tr": "",
-      "commentaires": "FCO au 16/05/26"
     },
     {
       "nom": "RICHARD",

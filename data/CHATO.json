@@ -6,7 +6,7 @@
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "chato@groupe-edgard.com",
   "periode": {
-    "mois": 5,
+    "mois": 6,
     "annee": 2026
   },
   "jours_ouvres": null,
@@ -49,7 +49,7 @@
       "commentaires": ""
     },
     {
-      "nom": "MEDERIC \n(VALAIZON)",
+      "nom": "MEDERIC \r\n(VALAIZON)",
       "prenom": "Anne Gaëlle",
       "tps": "39",
       "transport": "",
@@ -58,7 +58,7 @@
       "commentaires": ""
     },
     {
-      "nom": "PICHARD \n(LECONTE)",
+      "nom": "PICHARD \r\n(LECONTE)",
       "prenom": "Aurélie",
       "tps": "35",
       "transport": "",

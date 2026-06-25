@@ -6,7 +6,7 @@
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "havro@groupe-edgard.com",
   "periode": {
-    "mois": 5,
+    "mois": 6,
     "annee": 2026
   },
   "jours_ouvres": null,
@@ -28,7 +28,7 @@
       "transport": "",
       "mutuelle": "O",
       "tr": "",
-      "commentaires": "CPP du 01/11/25 au 31/10/26\nReprise anticipé à 36h le 01/06/26"
+      "commentaires": ""
     },
     {
       "nom": "LEROUSSEAU",

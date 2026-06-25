@@ -6,7 +6,7 @@
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "turo@groupe-edgard.com",
   "periode": {
-    "mois": 5,
+    "mois": 6,
     "annee": 2026
   },
   "jours_ouvres": null,
@@ -29,15 +29,6 @@
       "mutuelle": "O",
       "tr": "",
       "commentaires": ""
-    },
-    {
-      "nom": "BARDOU",
-      "prenom": "Juliette",
-      "tps": "39",
-      "transport": "",
-      "mutuelle": "N",
-      "tr": "",
-      "commentaires": "CDD du 04/11/25 au 23/05/26"
     },
     {
       "nom": "CARPI",
@@ -77,6 +68,15 @@
     },
     {
       "nom": "GOGDET",
+      "prenom": "Simon",
+      "tps": "35",
+      "transport": "",
+      "mutuelle": "N",
+      "tr": "",
+      "commentaires": "CDD du 01/07/26 au 31/07/26"
+    },
+    {
+      "nom": "GOGDET",
       "prenom": "Vincent",
       "tps": "41",
       "transport": "",
@@ -105,7 +105,7 @@
     {
       "nom": "LACOURT",
       "prenom": "Jules",
-      "tps": "19",
+      "tps": "28",
       "transport": "",
       "mutuelle": "O",
       "tr": "",
@@ -116,9 +116,9 @@
       "prenom": "Geoffrey",
       "tps": "41",
       "transport": "",
-      "mutuelle": "",
+      "mutuelle": "O",
       "tr": "",
-      "commentaires": "Emb le 19/05/26"
+      "commentaires": ""
     },
     {
       "nom": "LHOTELLIER",

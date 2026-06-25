@@ -6,7 +6,7 @@
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "jisam@groupe-edgard.com",
   "periode": {
-    "mois": 5,
+    "mois": 6,
     "annee": 2026
   },
   "jours_ouvres": null,
@@ -46,7 +46,16 @@
       "transport": "",
       "mutuelle": "O",
       "tr": "",
-      "commentaires": ""
+      "commentaires": "Sortie le 05/07/26"
+    },
+    {
+      "nom": "LEFLAËC",
+      "prenom": "Sylvain",
+      "tps": "39",
+      "transport": "",
+      "mutuelle": "?",
+      "tr": "",
+      "commentaires": "Embauche le 06/07/26"
     },
     {
       "nom": "DENIS",
@@ -55,7 +64,7 @@
       "transport": "",
       "mutuelle": "O",
       "tr": "",
-      "commentaires": ""
+      "commentaires": "Sortie le 15/07/26"
     },
     {
       "nom": "RABOUILLE",

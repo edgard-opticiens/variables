@@ -6,11 +6,11 @@
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "edgard_developpement@groupe-edgard.com",
   "periode": {
-    "mois": 5,
+    "mois": 6,
     "annee": 2026
   },
-  "jours_ouvres": 17,
-  "tr": 17,
+  "jours_ouvres": null,
+  "tr": 22,
   "collaborateurs": [
     {
       "nom": "BOISSEAU",
@@ -55,7 +55,7 @@
       "transport": "",
       "mutuelle": "O",
       "tr": "",
-      "commentaires": "TPT 23h (59%) au 01/04/26"
+      "commentaires": "TPT 31h (80%) au 01/04/26"
     },
     {
       "nom": "ETIENNE",

@@ -6,20 +6,29 @@
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "strabo@groupe-edgard.com",
   "periode": {
-    "mois": 5,
+    "mois": 6,
     "annee": 2026
   },
   "jours_ouvres": null,
   "tr": null,
   "collaborateurs": [
     {
-      "nom": "DUVAL",
-      "prenom": "Thomas",
+      "nom": "CHABIN-SCIEUR",
+      "prenom": "Satine",
       "tps": "41",
       "transport": "",
       "mutuelle": "O",
       "tr": "",
-      "commentaires": ""
+      "commentaires": "Embauche le 01/07/26"
+    },
+    {
+      "nom": "DUVAL",
+      "prenom": "Thomas",
+      "tps": "41",
+      "transport": "56",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": "JUSTIFICATIF TRANSPORT A FOURNIR"
     },
     {
       "nom": "LE GALL",
@@ -38,15 +47,6 @@
       "mutuelle": "O",
       "tr": "",
       "commentaires": ""
-    },
-    {
-      "nom": "MERCUSOT",
-      "prenom": "Victorine",
-      "tps": "36",
-      "transport": "",
-      "mutuelle": "N",
-      "tr": "",
-      "commentaires": "CDD du 22/04/26 au 30/05/2026"
     },
     {
       "nom": "MOTSCH",
@@ -74,15 +74,6 @@
       "mutuelle": "O",
       "tr": "",
       "commentaires": ""
-    },
-    {
-      "nom": "THURNREITER",
-      "prenom": "Lara",
-      "tps": "41",
-      "transport": "",
-      "mutuelle": "O",
-      "tr": "",
-      "commentaires": "FCO le 09/05/26"
     }
   ]
 }

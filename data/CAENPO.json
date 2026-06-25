@@ -6,21 +6,12 @@
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "caenpo@groupe-edgard.com",
   "periode": {
-    "mois": 5,
+    "mois": 6,
     "annee": 2026
   },
   "jours_ouvres": null,
   "tr": null,
   "collaborateurs": [
-    {
-      "nom": "BARBEREAU",
-      "prenom": "Sacha",
-      "tps": "41",
-      "transport": "",
-      "mutuelle": "O",
-      "tr": "",
-      "commentaires": "FCO le 13/05/26"
-    },
     {
       "nom": "BELLITE",
       "prenom": "Alexy",
@@ -148,17 +139,17 @@
       "commentaires": ""
     },
     {
-      "nom": "PEZET",
-      "prenom": "Camille",
-      "tps": "41",
+      "nom": "PERRY",
+      "prenom": "Louise",
+      "tps": "35",
       "transport": "",
-      "mutuelle": "O",
+      "mutuelle": "N",
       "tr": "",
-      "commentaires": ""
+      "commentaires": "CDD du 06/07/26 au 31/07/26"
     },
     {
-      "nom": "PORTE",
-      "prenom": "Gatien",
+      "nom": "PEZET",
+      "prenom": "Camille",
       "tps": "41",
       "transport": "",
       "mutuelle": "O",

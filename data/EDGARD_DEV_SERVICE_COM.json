@@ -6,7 +6,7 @@
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "edgard_dev_service_com@groupe-edgard.com",
   "periode": {
-    "mois": 5,
+    "mois": 6,
     "annee": 2026
   },
   "jours_ouvres": null,
@@ -24,7 +24,7 @@
     {
       "nom": "FRANCK",
       "prenom": "Samuel",
-      "tps": "Forfait\njour",
+      "tps": "Forfait\r\njour",
       "transport": "",
       "mutuelle": "O",
       "tr": "",

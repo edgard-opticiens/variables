@@ -6,7 +6,7 @@
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "nanceo@groupe-edgard.com",
   "periode": {
-    "mois": 5,
+    "mois": 6,
     "annee": 2026
   },
   "jours_ouvres": null,
@@ -26,7 +26,7 @@
       "prenom": "Cécile",
       "tps": "36",
       "transport": "",
-      "mutuelle": "?",
+      "mutuelle": "N",
       "tr": "",
       "commentaires": "CDD du 10/06/26 au 31/12/26"
     },
