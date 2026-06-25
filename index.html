@@ -657,7 +657,7 @@ function buildPrintable(sigPng){
     return c.absences.map((a,ai)=>{
       let h=`<tr${ai===k-1?' class="emp-end"':''}>`;
       if(ai===0){
-        h+=`<td rowspan="${k}" style="${B}font-weight:700">${esc(c.nom)}</td><td rowspan="${k}" style="${B}">${esc(c.prenom)}</td><td rowspan="${k}" style="${B}">${esc(c.tps)}</td>`;
+        h+=`<td rowspan="${k}" class="fit" style="${B}font-weight:700"><span style="white-space:nowrap;display:inline-block">${esc(c.nom)}</span></td><td rowspan="${k}" class="fit" style="${B}"><span style="white-space:nowrap;display:inline-block">${esc(c.prenom)}</span></td><td rowspan="${k}" style="${B}">${esc(c.tps)}</td>`;
       }
       h+=`<td style="${Babs}">${esc(fmtDate(a.debut))}</td><td style="${Babs}">${esc(fmtDate(a.fin))}</td><td style="${Babs}text-align:center">${esc(a.joursCP)}</td><td style="${Babs}text-align:center;font-weight:700">${esc(a.motif)}</td><td style="${Babs}text-align:center">${esc(a.heures)}</td>`;
       if(ai===0){
@@ -741,6 +741,13 @@ async function generatePDF(){
   const sigPng=await rasterizeSigs();
   const el=buildPrintable(sigPng);
   try{
+    // Ajuste la police des Nom/Prénom pour qu'ils tiennent sur une seule ligne.
+    el.querySelectorAll(".fit").forEach(td=>{
+      const span=td.firstElementChild; if(!span) return;
+      const avail=td.clientWidth-12; let fs=11, g=0;
+      span.style.fontSize=fs+"px";
+      while(span.offsetWidth>avail && fs>6 && g++<40){ fs-=0.5; span.style.fontSize=fs+"px"; }
+    });
     const scale=2;
     const canvas=await html2canvas(el,{scale:scale,backgroundColor:"#ffffff",useCORS:true});
     const {jsPDF}=window.jspdf;
