@@ -219,7 +219,7 @@ body.modal-open{overflow:hidden;position:fixed;width:100%}
     </div>
 
     <div class="legend">
-      <span class="motif-line">* Congés Payés = CP&nbsp;&nbsp;&nbsp;&nbsp;Congés Sans Solde = CSS&nbsp;&nbsp;&nbsp;&nbsp;Maladie = AM&nbsp;&nbsp;&nbsp;&nbsp;Maternité = MAT&nbsp;&nbsp;&nbsp;&nbsp;Paternité = PAT&nbsp;&nbsp;&nbsp;&nbsp;Congé Parental = PAR&nbsp;&nbsp;&nbsp;&nbsp;Accident = AT&nbsp;&nbsp;&nbsp;&nbsp;Evènement familial = EVT&nbsp;&nbsp;&nbsp;&nbsp;Absence non rémunérée = ANR</span>
+      <span class="motif-line">* Congés Payés = CP&nbsp;&nbsp;&nbsp;&nbsp;Congés Sans Solde = CSS&nbsp;&nbsp;&nbsp;&nbsp;Maladie = AM&nbsp;&nbsp;&nbsp;&nbsp;Maternité = MAT&nbsp;&nbsp;&nbsp;&nbsp;Paternité = PAT&nbsp;&nbsp;&nbsp;&nbsp;Congé Parental = PAR&nbsp;&nbsp;&nbsp;&nbsp;Accident = AT&nbsp;&nbsp;&nbsp;&nbsp;Evènement familial = EVT&nbsp;&nbsp;&nbsp;&nbsp;Absence non rémunérée = ANR&nbsp;&nbsp;&nbsp;&nbsp;Congé Révision = CR</span>
       <span class="note">* Merci de joindre tous les mois le justificatif d'abonnement transport en commun pour les collaborateurs concernés. Si arrêt de l'abonnement, le noter dans la colonne commentaires. Seuls les abonnements transport en commun sont remboursables (les tickets individuels sont exclus) dans la limite du mois M-1.</span>
     </div>
 
@@ -297,7 +297,7 @@ const EMBEDDED_DEMO = {
   ]
 };
 
-const MOTIFS = ["","CP","CSS","AM","MAT","PAT","PAR","AT","EVT","ANR"];
+const MOTIFS = ["","CP","CSS","AM","MAT","PAT","PAR","AT","EVT","ANR","CR"];
 const MOIS = ["JANVIER","FÉVRIER","MARS","AVRIL","MAI","JUIN","JUILLET","AOÛT","SEPTEMBRE","OCTOBRE","NOVEMBRE","DÉCEMBRE"];
 
 function blankAbs(){ return {debut:"",fin:"",joursCP:"",motif:"",heures:""}; }
@@ -687,7 +687,7 @@ function buildPrintable(sigPng){
       <tbody>${rows}</tbody>
     </table>
     <div class="pdf-break" style="margin-top:14px;font-size:10.5px;color:#16242a;line-height:1.7">
-      * Congés Payés = CP&nbsp;&nbsp;&nbsp;&nbsp;Congés Sans Solde = CSS&nbsp;&nbsp;&nbsp;&nbsp;Maladie = AM&nbsp;&nbsp;&nbsp;&nbsp;Maternité = MAT&nbsp;&nbsp;&nbsp;&nbsp;Paternité = PAT&nbsp;&nbsp;&nbsp;&nbsp;Congé Parental = PAR&nbsp;&nbsp;&nbsp;&nbsp;Accident = AT&nbsp;&nbsp;&nbsp;&nbsp;Evènement familial = EVT&nbsp;&nbsp;&nbsp;&nbsp;Absence non rémunérée = ANR
+      * Congés Payés = CP&nbsp;&nbsp;&nbsp;&nbsp;Congés Sans Solde = CSS&nbsp;&nbsp;&nbsp;&nbsp;Maladie = AM&nbsp;&nbsp;&nbsp;&nbsp;Maternité = MAT&nbsp;&nbsp;&nbsp;&nbsp;Paternité = PAT&nbsp;&nbsp;&nbsp;&nbsp;Congé Parental = PAR&nbsp;&nbsp;&nbsp;&nbsp;Accident = AT&nbsp;&nbsp;&nbsp;&nbsp;Evènement familial = EVT&nbsp;&nbsp;&nbsp;&nbsp;Absence non rémunérée = ANR&nbsp;&nbsp;&nbsp;&nbsp;Congé Révision = CR
       <div style="margin-top:6px;font-weight:700;color:#c62828">* Merci de joindre tous les mois le justificatif d'abonnement transport en commun pour les collaborateurs concernés. Si arrêt de l'abonnement, le noter dans la colonne commentaires. Seuls les abonnements transport en commun sont remboursables (les tickets individuels sont exclus) dans la limite du mois M-1.</div>
     </div>
     <div class="pdf-break" style="margin-top:22px;display:flex;justify-content:flex-end">
