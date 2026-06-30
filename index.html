@@ -301,6 +301,43 @@ const MOTIFS = ["","CP","CSS","AM","MAT","PAT","PAR","AT","EVT","ANR","CR"];
 const MOIS = ["JANVIER","FÉVRIER","MARS","AVRIL","MAI","JUIN","JUILLET","AOÛT","SEPTEMBRE","OCTOBRE","NOVEMBRE","DÉCEMBRE"];
 
 function blankAbs(){ return {debut:"",fin:"",joursCP:"",motif:"",heures:""}; }
+
+/* ===== Décompte automatique des CP (logique reprise à l'identique des demandes de CP) ===== */
+function easter(y){var a=y%19,b=Math.floor(y/100),c=y%100,d=Math.floor(b/4),e=b%4,f=Math.floor((b+8)/25),g=Math.floor((b-f+1)/3),h=(19*a+b-d-g+15)%30,i=Math.floor(c/4),k=c%4,l=(32+2*e+2*i-h-k)%7,m=Math.floor((a+11*h+22*l)/451),mo=Math.floor((h+l-7*m+114)/31)-1,da=((h+l-7*m+114)%31)+1;return new Date(y,mo,da)}
+function feries(y){var e=easter(y),a=function(d,n){var x=new Date(d);x.setDate(d.getDate()+n);return x};return new Set([new Date(y,0,1),new Date(y,4,1),new Date(y,4,8),new Date(y,6,14),new Date(y,7,15),new Date(y,10,1),new Date(y,10,11),new Date(y,11,25),a(e,1),a(e,39),a(e,50)].map(function(d){return d.getFullYear()*10000+(d.getMonth()+1)*100+d.getDate()}))}
+function countJ(s,f){
+  if(!s||!f)return{c:0,fe:0};
+  var S=new Date(s+'T00:00:00'),F=new Date(f+'T00:00:00');if(F<S)return{c:0,fe:0};
+  var fy=new Set();for(var y=S.getFullYear();y<=F.getFullYear();y++)feries(y).forEach(function(k){fy.add(k)});
+  var cp=0,fe=0,dw=S.getDay();if(dw===0)dw=7;
+  var ws=new Date(S);ws.setDate(S.getDate()-(dw-1));
+  while(ws<=F){
+    var r=0,rf=0,r5=0;
+    for(var d=0;d<6;d++){var c=new Date(ws);c.setDate(ws.getDate()+d);if(c>=S&&c<=F){var k=c.getFullYear()*10000+(c.getMonth()+1)*100+c.getDate();r++;if(d<5)r5++;if(fy.has(k))rf++;}}
+    if(r===6){
+      var rfLV=0;
+      for(var d2=0;d2<5;d2++){var c2=new Date(ws);c2.setDate(ws.getDate()+d2);var k2=c2.getFullYear()*10000+(c2.getMonth()+1)*100+c2.getDate();if(fy.has(k2))rfLV++;}
+      cp+=Math.max(0,5-rfLV);fe+=rfLV;
+    }else{var adj=(r>=5?1:0);cp+=Math.max(0,r-rf-adj);fe+=rf;}
+    ws.setDate(ws.getDate()+7);
+  }
+  return{c:cp,fe:fe};
+}
+// Edgard et GdO utilisent la même logique (le formulaire GdO est une variante du même calcul).
+// Si la logique GdO diffère un jour, créer countJ_gdo() et brancher ci-dessous sur le code "generale".
+function decompteCP(debut,fin,brand){ return countJ(debut,fin); }
+function autoCP(g,a){
+  var abs=state[g].absences[a];
+  var inp=tbody.querySelector('input[data-g="'+g+'"][data-a="'+a+'"][data-f="joursCP"]');
+  if(abs.motif==="CP" && abs.debut && abs.fin){
+    var r=decompteCP(abs.debut,abs.fin,STORE.brand);
+    abs.joursCP=String(r.c);
+    if(inp){ inp.value=abs.joursCP; inp.title="Calculé automatiquement"+(r.fe>0?" (dont "+r.fe+" jour férié(s) dans la période)":"")+" — modifiable si besoin"; }
+  } else if(abs.motif!=="CP"){
+    abs.joursCP="";
+    if(inp){ inp.value=""; inp.title=""; }
+  }
+}
 let state = [];
 let dirSig = null;
 
@@ -526,6 +563,7 @@ function renderTable(){
     });
   });
   state.forEach((c,gi)=>paintSig(gi));
+  state.forEach((c,gi)=>c.absences.forEach((a,ai)=>{ if(a.motif==="CP"&&a.debut&&a.fin&&(a.joursCP===""||a.joursCP==null)) autoCP(gi,ai); }));
 }
 function paintSig(gi){
   const cell = $("sig-"+gi); if(!cell) return;
@@ -538,6 +576,7 @@ tbody.addEventListener("input", e=>{
   const t = e.target;
   if(t.dataset.f!==undefined && t.dataset.g!==undefined){
     state[t.dataset.g].absences[t.dataset.a][t.dataset.f] = t.value;
+    if(t.dataset.f==="motif"||t.dataset.f==="debut"||t.dataset.f==="fin"){ autoCP(+t.dataset.g, +t.dataset.a); }
   } else if(t.dataset.emp!==undefined){
     state[t.dataset.emp][t.dataset.f] = t.value;
   }
