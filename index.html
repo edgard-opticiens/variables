@@ -438,7 +438,7 @@ function freshState(){
 }
 function buildSnapshot(){ return { state, dirSig, dirNom:$("dir-nom").value, dirPrenom:$("dir-prenom").value, _t:Date.now() }; }
 function saveTo(key){ try{ localStorage.setItem(key, JSON.stringify(buildSnapshot())); }catch(e){} }
-function save(){ saveTo(periodKey()); cloudSave(); }
+function save(){ saveTo(periodKey()); if(SYNC_SAVE_URL) setSyncBadge("Modifications non enregistrées — cliquez sur 💾"); }
 
 /* ===== Étape 2 : synchronisation de l'état en cours (cloud n8n) ===== */
 function perFor(){ return `${$("annee").value}-${String(+moisSel.value+1).padStart(2,"0")}`; }
@@ -692,7 +692,7 @@ $("pad-ok").onclick=()=>{
   const data="data:image/svg+xml;base64,"+btoa(svg);
   if(padTarget==="collab"){ state[padIndex].sig=data; paintSig(padIndex); }
   else { dirSig=data; $("dir-sign").innerHTML=`<img src="${data}">`; }
-  closePad(); save(); updateChecklist(); cloudSave(true);
+  closePad(); save(); updateChecklist();
 };
 $("dir-sign").onclick=()=>openPad("dir",null);
 $("dir-sign-clear").onclick=()=>{ dirSig=null; $("dir-sign").innerHTML="Toucher pour signer"; save(); updateChecklist(); };
