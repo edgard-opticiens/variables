@@ -297,6 +297,13 @@ const EMBEDDED_DEMO = {
   ]
 };
 
+/* ======================================================================
+   CONFIG n8n — Étape 1 (envoi auto + archive centrale)
+   Collez ici l'URL du webhook n8n (Production URL). Laissez vide ("")
+   pour conserver le comportement actuel (ouverture de l'e-mail).
+   ====================================================================== */
+const WEBHOOK_URL = "";
+
 const MOTIFS = ["","CP","CSS","AM","MAT","PAT","PAR","AT","EVT","ANR","CR"];
 const MOIS = ["JANVIER","FÉVRIER","MARS","AVRIL","MAI","JUIN","JUILLET","AOÛT","SEPTEMBRE","OCTOBRE","NOVEMBRE","DÉCEMBRE"];
 
@@ -776,7 +783,8 @@ async function rasterizeSigs(){
   if(dirSig){ out.dir=await svgToPng(dirSig,312,138); }
   return out;
 }
-async function generatePDF(){
+async function generatePDF(opts){
+  opts=opts||{};
   const sigPng=await rasterizeSigs();
   const el=buildPrintable(sigPng);
   try{
@@ -826,9 +834,10 @@ async function generatePDF(){
       pdf.addImage(tmp,"PNG",0,0,pw,imgH);
       first=false; bodyStart=bodyEnd;
     }
-    pdf.save(`Variables_${STORE.code}_${MOIS[+moisSel.value]}_${$("annee").value}.pdf`);
-    toast("PDF téléchargé ✓");
-  }catch(err){ console.error(err); toast("Erreur PDF — voir la console"); }
+    const nomPdf=`Variables_${STORE.code}_${MOIS[+moisSel.value]}_${$("annee").value}.pdf`;
+    if(opts.save!==false){ pdf.save(nomPdf); toast("PDF téléchargé ✓"); }
+    return pdf.output("datauristring").split(",")[1];   // base64 (sans le préfixe data:)
+  }catch(err){ console.error(err); toast("Erreur PDF — voir la console"); return null; }
   finally{ el.remove(); }
 }
 
@@ -836,6 +845,33 @@ async function generatePDF(){
    ENVOI AUX RH — mail ouvert de façon SYNCHRONE (conserve le geste
    utilisateur, sinon le navigateur bloque), puis génération du PDF.
    ================================================================= */
+function buildPayload(){
+  const total=state.length, sc=sigCount();
+  const per=`${$("annee").value}-${String(+moisSel.value+1).padStart(2,"0")}`;
+  return {
+    cle:`${STORE.code}-${per}`,                 // clé unique anti-doublon (1 ligne / magasin / mois)
+    magasin_code:STORE.code,
+    magasin_nom:STORE.nom,
+    enseigne:STORE.brand,
+    mois:MOIS[+moisSel.value],
+    annee:$("annee").value,
+    periode:per,
+    directeur_nom:($("dir-nom")?$("dir-nom").value:""),
+    directeur_prenom:($("dir-prenom")?$("dir-prenom").value:""),
+    rh_to:STORE.rh_to, rh_cc:STORE.rh_cc,
+    total_salaries:total,
+    signatures_ok:sc,
+    complet:(total>0 && sc===total),
+    date_envoi:new Date().toISOString(),
+    collaborateurs:state.map(c=>({
+      nom:c.nom, prenom:c.prenom, tps:c.tps,
+      transport:c.transport, mutuelle:c.mutuelle, tr:c.tr,
+      commentaires:c.commentaires, signe:!!c.sig,
+      absences:(c.absences||[]).filter(a=>a.debut||a.fin||a.motif||a.joursCP||a.heures)
+        .map(a=>({debut:a.debut,fin:a.fin,joursCP:a.joursCP,motif:a.motif,heures:a.heures}))
+    }))
+  };
+}
 function openMail(){
   const moisTxt=MOIS[+moisSel.value], annee=$("annee").value;
   const moisMin=moisTxt.toLowerCase();
@@ -851,10 +887,32 @@ Excellente journée`;
   const a=document.createElement("a"); a.href=url; a.style.display="none";
   document.body.appendChild(a); a.click(); a.remove();
 }
-$("btn-send").onclick=()=>{
+$("btn-send").onclick=async ()=>{
   if(!(periodOk()&&dirOk())){ toast("Période et signature responsable requises."); return; }
-  openMail();                 // 1) ouvre le brouillon (geste préservé)
-  generatePDF();              // 2) télécharge le PDF à joindre
+
+  if(WEBHOOK_URL){
+    // Envoi automatique vers n8n (avec le PDF joint), repli e-mail si indisponible.
+    toast("Envoi en cours…");
+    const payload=buildPayload();
+    try{ payload.pdf_base64=await generatePDF({save:false}); payload.pdf_nom=`Variables_${STORE.code}_${MOIS[+moisSel.value]}_${$("annee").value}.pdf`; }
+    catch(e){ console.error(e); }
+    try{
+      const res=await fetch(WEBHOOK_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
+      if(!res.ok) throw new Error("HTTP "+res.status);
+      toast("Variable envoyée aux RH ✓");
+      return;
+    }catch(e){
+      console.error(e);
+      generatePDF();            // télécharge le PDF pour la pièce jointe manuelle
+      openMail();               // repli : ouvre l'e-mail
+      toast("Envoi auto indisponible — e-mail ouvert, joignez le PDF téléchargé.");
+      return;
+    }
+  }
+
+  // Aucun webhook configuré → comportement actuel (e-mail + PDF à joindre).
+  openMail();
+  generatePDF();
   toast("E-mail ouvert — joignez le PDF qui vient d'être téléchargé.");
 };
 
