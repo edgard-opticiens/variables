@@ -349,6 +349,7 @@ let state = [];
 let dirSig = null;
 
 const $ = id => document.getElementById(id);
+function toast(m, ms){ const t=$("toast"); if(!t) return; t.textContent=m; t.classList.add("show"); clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove("show"), ms||3000); }
 function esc(s){ return (s==null?"":(""+s)).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
 
 const moisSel = $("mois");
