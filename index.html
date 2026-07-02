@@ -796,7 +796,7 @@ async function generatePDF(opts){
       span.style.fontSize=fs+"px";
       while(span.offsetWidth>avail && fs>6 && g++<40){ fs-=0.5; span.style.fontSize=fs+"px"; }
     });
-    const scale=2;
+    const scale=1.7;
     const canvas=await html2canvas(el,{scale:scale,backgroundColor:"#ffffff",useCORS:true});
     const {jsPDF}=window.jspdf;
     const pdf=new jsPDF({orientation:"landscape",unit:"mm",format:"a4"});
@@ -832,7 +832,7 @@ async function generatePDF(opts){
       ctx.drawImage(canvas, 0,bodyStart,canvas.width,bodyH, 0,headerH,canvas.width,bodyH);  // lignes de la page
       const imgH=tmp.height*pw/canvas.width;
       if(!first){ pdf.addPage(); }
-      pdf.addImage(tmp,"PNG",0,0,pw,imgH);
+      pdf.addImage(tmp.toDataURL("image/jpeg",0.72),"JPEG",0,0,pw,imgH,undefined,"FAST");
       first=false; bodyStart=bodyEnd;
     }
     const nomPdf=`Variables_${STORE.code}_${MOIS[+moisSel.value]}_${$("annee").value}.pdf`;
