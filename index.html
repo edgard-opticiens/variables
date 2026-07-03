@@ -451,7 +451,9 @@ function cloudSave(now){
     setSyncBadge("Enregistrement…");
     try{
       const snap=buildSnapshot();
+      const _total=state.length, _sc=sigCount();
       const body={ cle:cleFor(), magasin_code:STORE.code, magasin_nom:STORE.nom, periode:perFor(),
+                   total_salaries:_total, signatures_ok:_sc, complet:(_total>0 && _sc===_total),
                    etat:LZString.compressToEncodedURIComponent(JSON.stringify(snap)), maj:new Date().toISOString() };
       const res=await fetch(SYNC_SAVE_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});
       setSyncBadge(res.ok?"Enregistré ✓":"Erreur d'enregistrement");
