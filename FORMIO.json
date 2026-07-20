@@ -1,0 +1,79 @@
+{
+  "code": "FORMIO",
+  "nom": "FORMIO",
+  "pin": "7930",
+  "brand": "generale",
+  "rh_to": "ressources-humaines@groupe-edgard.com",
+  "rh_cc": "formio@groupe-edgard.com",
+  "periode": {
+    "mois": 7,
+    "annee": 2026
+  },
+  "jours_ouvres": null,
+  "tr": null,
+  "collaborateurs": [
+    {
+      "nom": "BOULDRON",
+      "prenom": "Clémence",
+      "tps": "35",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "DAVID",
+      "prenom": "Maud",
+      "tps": "39",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "FOUQUET",
+      "prenom": "Florence",
+      "tps": "19.5",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "GUITTARD",
+      "prenom": "Romain",
+      "tps": "39",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "PETIT",
+      "prenom": "Jérôme",
+      "tps": "39",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "SOULARD",
+      "prenom": "Jessica",
+      "tps": "39",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "SOULARD",
+      "prenom": "Sabrina",
+      "tps": "39",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "0",
+      "commentaires": ""
+    }
+  ]
+}

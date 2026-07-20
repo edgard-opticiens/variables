@@ -1,0 +1,79 @@
+{
+  "code": "STRABO",
+  "nom": "STRABO",
+  "pin": "2749",
+  "brand": "edgard",
+  "rh_to": "ressources-humaines@groupe-edgard.com",
+  "rh_cc": "strabo@groupe-edgard.com",
+  "periode": {
+    "mois": 7,
+    "annee": 2026
+  },
+  "jours_ouvres": null,
+  "tr": null,
+  "collaborateurs": [
+    {
+      "nom": "CHABIN-SCIEUR",
+      "prenom": "Satine",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "DUVAL",
+      "prenom": "Thomas",
+      "tps": "41",
+      "transport": "56",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": "JUSTIFICATIF TRANSPORT A FOURNIR"
+    },
+    {
+      "nom": "LE GALL",
+      "prenom": "Pierre",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "METZ",
+      "prenom": "Sébastien",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "MOTSCH",
+      "prenom": "Elise",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "OLTZ",
+      "prenom": "Sophie",
+      "tps": "41",
+      "transport": "56",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": "JUSTIFICATIF TRANSPORT A FOURNIR"
+    },
+    {
+      "nom": "STRAUSS",
+      "prenom": "Agathe",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    }
+  ]
+}
