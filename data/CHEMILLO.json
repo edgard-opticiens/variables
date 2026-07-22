@@ -6,7 +6,7 @@
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "chemillo@groupe-edgard.com",
   "periode": {
-    "mois": 6,
+    "mois": 7,
     "annee": 2026
   },
   "jours_ouvres": null,
@@ -45,11 +45,11 @@
       "tps": "39",
       "transport": "",
       "mutuelle": "O",
-      "tr": "",
+      "tr": "0",
       "commentaires": ""
     },
     {
-      "nom": "THOMAS",
+      "nom": "THOMAS (CAILLAUD)",
       "prenom": "Yohanna",
       "tps": "35",
       "transport": "",

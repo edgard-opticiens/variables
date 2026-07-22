@@ -6,7 +6,7 @@
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "lyono@groupe-edgard.com",
   "periode": {
-    "mois": 6,
+    "mois": 7,
     "annee": 2026
   },
   "jours_ouvres": null,
@@ -18,6 +18,15 @@
       "tps": "41",
       "transport": "",
       "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "CHÉRON",
+      "prenom": "Manon",
+      "tps": "9",
+      "transport": "",
+      "mutuelle": "",
       "tr": "",
       "commentaires": ""
     },
@@ -46,7 +55,7 @@
       "transport": "",
       "mutuelle": "O",
       "tr": "",
-      "commentaires": "Ct. Appr. Licence OL - 01/09/25 au 18/08/26"
+      "commentaires": "Ct. Appr. Licence OL - 01/09/25 au 18/08/26 + CDI au 19/08/26"
     },
     {
       "nom": "LEVRAULT",

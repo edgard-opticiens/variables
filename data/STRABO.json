@@ -6,7 +6,7 @@
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "strabo@groupe-edgard.com",
   "periode": {
-    "mois": 6,
+    "mois": 7,
     "annee": 2026
   },
   "jours_ouvres": null,
@@ -19,7 +19,7 @@
       "transport": "",
       "mutuelle": "O",
       "tr": "",
-      "commentaires": "Embauche le 01/07/26"
+      "commentaires": ""
     },
     {
       "nom": "DUVAL",
