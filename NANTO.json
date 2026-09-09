@@ -6,7 +6,7 @@
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "nanto@groupe-edgard.com",
   "periode": {
-    "mois": 7,
+    "mois": 8,
     "annee": 2026
   },
   "jours_ouvres": null,
@@ -27,15 +27,6 @@
       "tps": "41",
       "transport": "",
       "mutuelle": "O",
-      "tr": "",
-      "commentaires": ""
-    },
-    {
-      "nom": "DUPÉ",
-      "prenom": "Maëlle",
-      "tps": "41",
-      "transport": "",
-      "mutuelle": "N",
       "tr": "",
       "commentaires": ""
     },
@@ -67,15 +58,6 @@
       "commentaires": "JUSTIFICATIF TRANSPORT A FOURNIR"
     },
     {
-      "nom": "MENENDEZ",
-      "prenom": "Margot",
-      "tps": "35",
-      "transport": "",
-      "mutuelle": "O",
-      "tr": "",
-      "commentaires": "Ct Appr. LPO - 01/09/25 au 31/08/26"
-    },
-    {
       "nom": "MERCIER",
       "prenom": "Maude",
       "tps": "41",
@@ -91,7 +73,16 @@
       "transport": "",
       "mutuelle": "O",
       "tr": "",
-      "commentaires": ""
+      "commentaires": "TPT 20,50h (50%)du 31/08/26 AU 26/09/26"
+    },
+    {
+      "nom": "NOC",
+      "prenom": "Lancelot",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": "CDI au 01/09/26"
     },
     {
       "nom": "RESENDE",
@@ -101,6 +92,24 @@
       "mutuelle": "O",
       "tr": "",
       "commentaires": ""
+    },
+    {
+      "nom": "ROCHETEAU",
+      "prenom": "Léna",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "N",
+      "tr": "",
+      "commentaires": "CDI au 01/09/26"
+    },
+    {
+      "nom": "THOMAS",
+      "prenom": "Chloé",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "N",
+      "tr": "",
+      "commentaires": "CDI au 01/09/26"
     },
     {
       "nom": "VIRIOT",
