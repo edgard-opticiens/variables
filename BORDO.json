@@ -6,7 +6,7 @@
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "bordo@groupe-edgard.com",
   "periode": {
-    "mois": 7,
+    "mois": 8,
     "annee": 2026
   },
   "jours_ouvres": null,
@@ -19,16 +19,25 @@
       "transport": "",
       "mutuelle": "O",
       "tr": "",
-      "commentaires": ""
+      "commentaires": "FCO 12/09/26"
     },
     {
       "nom": "DU MESNIL-ADELÉE",
       "prenom": "Emma",
       "tps": "41",
-      "transport": "49",
+      "transport": "",
       "mutuelle": "O",
       "tr": "",
-      "commentaires": "REMBOURSEMENT SUR JUSTIFICATIF TRANSPORT"
+      "commentaires": ""
+    },
+    {
+      "nom": "GRATHWOHL",
+      "prenom": "Lou-André",
+      "tps": "39",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": "Emb CDI au 01/09/26"
     },
     {
       "nom": "LUNETEAU",

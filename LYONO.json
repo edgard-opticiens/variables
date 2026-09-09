@@ -6,7 +6,7 @@
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "lyono@groupe-edgard.com",
   "periode": {
-    "mois": 7,
+    "mois": 8,
     "annee": 2026
   },
   "jours_ouvres": null,
@@ -26,9 +26,9 @@
       "prenom": "Manon",
       "tps": "9",
       "transport": "",
-      "mutuelle": "",
+      "mutuelle": "O",
       "tr": "",
-      "commentaires": ""
+      "commentaires": "CDD du 25/07/26 au 26/12/26"
     },
     {
       "nom": "FRIC",
@@ -51,11 +51,11 @@
     {
       "nom": "LACROIX",
       "prenom": "Agathe",
-      "tps": "35",
+      "tps": "41",
       "transport": "",
       "mutuelle": "O",
       "tr": "",
-      "commentaires": "Ct. Appr. Licence OL - 01/09/25 au 18/08/26 + CDI au 19/08/26"
+      "commentaires": ""
     },
     {
       "nom": "LEVRAULT",

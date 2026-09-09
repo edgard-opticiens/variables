@@ -6,7 +6,7 @@
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "caenpo@groupe-edgard.com",
   "periode": {
-    "mois": 7,
+    "mois": 8,
     "annee": 2026
   },
   "jours_ouvres": null,
@@ -15,20 +15,11 @@
     {
       "nom": "BELLITE",
       "prenom": "Alexy",
-      "tps": "35",
+      "tps": "41",
       "transport": "",
       "mutuelle": "O",
       "tr": "",
-      "commentaires": "Ct Appr. BTS OL - 09/09/24 au 29/08/26"
-    },
-    {
-      "nom": "BLANCHARD",
-      "prenom": "Louis",
-      "tps": "35",
-      "transport": "",
-      "mutuelle": "O",
-      "tr": "",
-      "commentaires": "Ct Appr. BTS OL - 16/09/24 au 29/08/26 + redoublement"
+      "commentaires": "Emb CDI au 01/09/26"
     },
     {
       "nom": "CHARLES dit TINARD",
@@ -172,7 +163,7 @@
       "transport": "",
       "mutuelle": "N",
       "tr": "",
-      "commentaires": "Ct Appr. BTS OL du 02/09/24 au 29/08/26"
+      "commentaires": "Ct Appr. BTS OL du 02/09/24 au 28/08/27 (rdbt)"
     },
     {
       "nom": "TETREL",
@@ -200,15 +191,6 @@
       "mutuelle": "O",
       "tr": "",
       "commentaires": ""
-    },
-    {
-      "nom": "VORNIERES",
-      "prenom": "Kentin",
-      "tps": "35",
-      "transport": "",
-      "mutuelle": "O",
-      "tr": "",
-      "commentaires": "Ct Appr. Licence OL du 01/09/24 au 18/08/26"
     },
     {
       "nom": "ZAOUI",

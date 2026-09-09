@@ -6,7 +6,7 @@
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "nanceo@groupe-edgard.com",
   "periode": {
-    "mois": 7,
+    "mois": 8,
     "annee": 2026
   },
   "jours_ouvres": null,
@@ -18,7 +18,7 @@
       "tps": "41",
       "transport": "",
       "mutuelle": "O",
-      "tr": "",
+      "tr": "0",
       "commentaires": ""
     },
     {
