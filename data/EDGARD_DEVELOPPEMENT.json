@@ -6,7 +6,7 @@
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "edgard_developpement@groupe-edgard.com",
   "periode": {
-    "mois": 7,
+    "mois": 8,
     "annee": 2026
   },
   "jours_ouvres": null,
@@ -109,7 +109,7 @@
       "transport": "",
       "mutuelle": "N",
       "tr": "",
-      "commentaires": "TPT (50%) du 29/06 au 10/07/26"
+      "commentaires": ""
     },
     {
       "nom": "MARCHAND",
@@ -136,7 +136,7 @@
       "transport": "49",
       "mutuelle": "O",
       "tr": "",
-      "commentaires": "reprise 39h"
+      "commentaires": ""
     }
   ]
 }
