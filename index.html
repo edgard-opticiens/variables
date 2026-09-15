@@ -479,7 +479,9 @@ async function cloudLoad(){
 }
 function applySnapshot(d){
   const map={}; (d.state||[]).forEach(e=>{ map[e.nom+"|"+e.prenom]=e; });
-  state.forEach(c=>{ const e=map[c.nom+"|"+c.prenom]; if(e){ c.absences=(e.absences&&e.absences.length)?e.absences:[blankAbs()]; c.sig=e.sig||null; } });
+  state.forEach(c=>{ const e=map[c.nom+"|"+c.prenom]; if(e){ c.absences=(e.absences&&e.absences.length)?e.absences:[blankAbs()]; c.sig=e.sig||null;
+    c.transport=e.transport!=null?e.transport:c.transport; c.mutuelle=e.mutuelle!=null?e.mutuelle:c.mutuelle;
+    c.tr=e.tr!=null?e.tr:c.tr; c.commentaires=e.commentaires!=null?e.commentaires:c.commentaires; } });
   dirSig = d.dirSig || null;
   $("dir-sign").innerHTML = dirSig ? `<img src="${dirSig}">` : "Toucher pour signer";
   if(d.dirNom!=null) $("dir-nom").value=d.dirNom;
