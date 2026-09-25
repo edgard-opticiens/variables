@@ -252,6 +252,7 @@ body.modal-open{overflow:hidden;position:fixed;width:100%}
     <div class="actions">
       <span id="sync-badge" style="font-size:12px;color:var(--ink-soft);margin-right:6px"></span>
       <button class="btn" id="sync-btn" style="border:1.5px solid var(--accent);color:var(--accent);background:#fff;display:none">💾 Enregistrer</button>
+      <button class="btn" id="pdf-dl-btn" style="border:1.5px solid var(--accent);color:var(--accent);background:#fff;display:none">📄 Télécharger le PDF</button>
       <button class="btn btn-primary" id="btn-send">✉ Envoyer aux RH</button>
     </div>
   </div>
@@ -385,8 +386,15 @@ async function loadIndex(){
   return [{code:EMBEDDED_DEMO.code, nom:EMBEDDED_DEMO.nom}];      // démo locale
 }
 
+/* Ouverture directe depuis le tableau de bord RH : ?mag=CODE&pin=XXXX&periode=YYYY-MM
+   saute l'écran de code si le pin correspond, et pré-sélectionne la période. */
+const QS = new URLSearchParams(location.search);
+const AUTO_PIN = QS.get("pin");
+const AUTO_PERIODE = QS.get("periode");   // format "YYYY-MM"
+const EMBEDDED = window.parent && window.parent !== window;
+
 async function bootstrap(){
-  const code = new URLSearchParams(location.search).get("mag");
+  const code = QS.get("mag");
   if(code){                                   // lien direct éventuel (?mag=CODE)
     MODE = "single";
     STORE = await loadStoreByCode(code);
@@ -394,6 +402,10 @@ async function bootstrap(){
     $("store-select").style.display = "none";
     $("gate-store").textContent = STORE.nom;
     $("gate-sub").textContent = "Saisissez votre code d'accès";
+    if(AUTO_PIN && String(AUTO_PIN) === String(STORE.pin)){
+      $("pin").value = AUTO_PIN;
+      submitGate();
+    }
   } else {                                    // mode normal : menu déroulant
     MODE = "dropdown";
     const list = await loadIndex();
@@ -715,7 +727,10 @@ function updateChecklist(){
   $("chk-sig").lastChild.textContent=` Signatures salariés (${sc}/${state.length})`;
   $("btn-send").disabled = !(periodOk() && dirOk());
   $("dir-sign-clear").style.display = dirSig ? "inline-block" : "none";
+  const btnPdf = $("pdf-dl-btn");
+  if (btnPdf) btnPdf.style.display = (state.length > 0 && sc === state.length) ? "inline-block" : "none";
 }
+$("pdf-dl-btn") && ($("pdf-dl-btn").onclick = () => generatePDF());
 $("app").addEventListener("input", e=>{ if(e.target.id==="mois"||e.target.id==="annee") return; updateChecklist(); save(); });
 
 /* ---------- RESET ---------- */
@@ -938,6 +953,9 @@ $("btn-send").onclick=async ()=>{
       const res=await fetch(WEBHOOK_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
       if(!res.ok) throw new Error("HTTP "+res.status);
       toast("Variable envoyée aux RH ✓");
+      if(EMBEDDED){
+        try{ window.parent.postMessage({source:"variables-live", type:"submitted", magasin:STORE.code, periode:perFor()}, "*"); }catch(e){}
+      }
       return;
     }catch(e){
       console.error(e);
@@ -965,7 +983,11 @@ function renderLogo(){
 function startApp(){
   $("store-title").textContent = STORE.nom;
   renderLogo();
-  if(STORE.periode && STORE.periode.mois!=null){
+  var autoM = AUTO_PERIODE && /^\d{4}-\d{2}$/.test(AUTO_PERIODE) ? AUTO_PERIODE.split("-") : null;
+  if(autoM){
+    moisSel.value = Number(autoM[1]) - 1;
+    $("annee").value = autoM[0];
+  } else if(STORE.periode && STORE.periode.mois!=null){
     moisSel.value = STORE.periode.mois;
     $("annee").value = STORE.periode.annee || now.getFullYear();
   } else {
