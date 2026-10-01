@@ -745,11 +745,14 @@ $("reset-btn").onclick=()=>{
    PDF (paysage A4, multi-pages)
    ================================================================= */
 function fmtDate(d){ if(!d) return ""; const p=(""+d).split("-"); return p.length===3?`${p[2]}/${p[1]}/${p[0]}`:d; }
-function buildPrintable(sigPng){
+function buildPrintable(sigPng,padScale){
+  // padScale (<1) resserre les lignes du tableau pour faire tenir le document
+  // sur une seule page quand il ne depasse que de peu (voir generatePDF).
+  padScale = padScale || 1;
   const moisTxt=MOIS[+moisSel.value], annee=$("annee").value;
   const dirNom=$("dir-nom").value, dirPrenom=$("dir-prenom").value;
   const B="border:1px solid #d9d2c4;padding:6px 6px;word-break:break-word;overflow-wrap:anywhere;";
-  const Babs="border:1px solid #d9d2c4;padding:28px 6px;word-break:break-word;overflow-wrap:anywhere;";
+  const Babs=`border:1px solid #d9d2c4;padding:${Math.round(28*padScale)}px 6px;word-break:break-word;overflow-wrap:anywhere;`;
   const TH="padding:5px 4px;font-size:8px;font-weight:700;vertical-align:bottom;overflow-wrap:break-word;line-height:1.2;";
   const rows = state.map((c,gi)=>{
     const k=c.absences.length;
@@ -795,14 +798,14 @@ function buildPrintable(sigPng){
       </thead>
       <tbody>${rows}</tbody>
     </table>
-    <div class="pdf-break" style="margin-top:14px;font-size:10.5px;color:#16242a;line-height:1.7">
+    <div class="pdf-break" style="margin-top:${Math.round(14*Math.max(padScale,0.7))}px;font-size:10.5px;color:#16242a;line-height:1.7">
       * Congés Payés = CP&nbsp;&nbsp;&nbsp;&nbsp;Congés Sans Solde = CSS&nbsp;&nbsp;&nbsp;&nbsp;Maladie = AM&nbsp;&nbsp;&nbsp;&nbsp;Maternité = MAT&nbsp;&nbsp;&nbsp;&nbsp;Paternité = PAT&nbsp;&nbsp;&nbsp;&nbsp;Congé Parental = PAR&nbsp;&nbsp;&nbsp;&nbsp;Accident = AT&nbsp;&nbsp;&nbsp;&nbsp;Evènement familial = EVT&nbsp;&nbsp;&nbsp;&nbsp;Absence non rémunérée = ANR&nbsp;&nbsp;&nbsp;&nbsp;Congé Révision = CR
       <div style="margin-top:6px;font-weight:700;color:#c62828">* Merci de joindre tous les mois le justificatif d'abonnement transport en commun pour les collaborateurs concernés. Si arrêt de l'abonnement, le noter dans la colonne commentaires. Seuls les abonnements transport en commun sont remboursables (les tickets individuels sont exclus) dans la limite du mois M-1.</div>
     </div>
-    <div class="pdf-break" style="margin-top:22px;display:flex;justify-content:flex-end">
+    <div class="pdf-break" style="margin-top:${Math.round(22*Math.max(padScale,0.7))}px;display:flex;justify-content:flex-end">
       <div style="text-align:center;width:300px">
         <div style="font-size:12px;color:#4a5b60;margin-bottom:4px">Signature du Responsable — ${esc(dirPrenom)} ${esc(dirNom)}</div>
-        <div style="border:1px solid #bcae96;border-radius:8px;height:110px;display:flex;align-items:center;justify-content:center">
+        <div style="border:1px solid #bcae96;border-radius:8px;height:${Math.round(110*Math.max(padScale,0.75))}px;display:flex;align-items:center;justify-content:center">
           ${sigPng.dir?`<img src="${sigPng.dir}" style="max-height:100px;max-width:280px">`:""}
         </div>
       </div>
@@ -836,40 +839,76 @@ async function rasterizeSigs(){
   if(dirSig){ out.dir=await svgToPng(dirSig,312,138); }
   return out;
 }
+// Construit et rasterise le document imprimable a un niveau de compression
+// (padScale) donne. Retourne tout ce qu'il faut pour le paginer ; l'appelant
+// est responsable de retirer render.el du DOM une fois termine.
+async function renderPrintable(sigPng, padScale){
+  const el=buildPrintable(sigPng, padScale);
+  // Ajuste la police des Nom/Prénom pour qu'ils tiennent sur une seule ligne.
+  el.querySelectorAll(".fit").forEach(td=>{
+    const span=td.firstElementChild; if(!span) return;
+    const avail=td.clientWidth-12; let fs=11, g=0;
+    span.style.fontSize=fs+"px";
+    while(span.offsetWidth>avail && fs>6 && g++<40){ fs-=0.5; span.style.fontSize=fs+"px"; }
+  });
+  const scale=1.7;
+  const canvas=await html2canvas(el,{scale:scale,backgroundColor:"#ffffff",useCORS:true});
+  const elTop=el.getBoundingClientRect().top;
+  const yOf=n=> (n.getBoundingClientRect().top-elTop)*scale;
+  const yBot=n=> (n.getBoundingClientRect().bottom-elTop)*scale;
+
+  // Bandeau d'en-tête (logo + titre + en-têtes de colonnes) répété sur CHAQUE page.
+  const thead=el.querySelector("thead");
+  const headerH=Math.round(yBot(thead)); // du haut de la page (avec sa marge) jusqu'au bas des en-têtes
+
+  // Coupes SÛRES : seulement entre deux salariés (jamais au milieu d'un salarié à
+  // plusieurs absences), + juste avant la légende et la signature.
+  const cuts=[];
+  el.querySelectorAll("tbody tr.emp-end").forEach(tr=>{ cuts.push(Math.round(yBot(tr))); });
+  el.querySelectorAll(".pdf-break").forEach(n=>{ cuts.push(Math.round(yOf(n))); });
+  cuts.push(canvas.height);
+  const breaks=[...new Set(cuts)].filter(v=>v>headerH).sort((a,b)=>a-b);
+  return {el, canvas, headerH, breaks};
+}
 async function generatePDF(opts){
   opts=opts||{};
   const sigPng=await rasterizeSigs();
-  const el=buildPrintable(sigPng);
+  const createdEls=[];
   try{
-    // Ajuste la police des Nom/Prénom pour qu'ils tiennent sur une seule ligne.
-    el.querySelectorAll(".fit").forEach(td=>{
-      const span=td.firstElementChild; if(!span) return;
-      const avail=td.clientWidth-12; let fs=11, g=0;
-      span.style.fontSize=fs+"px";
-      while(span.offsetWidth>avail && fs>6 && g++<40){ fs-=0.5; span.style.fontSize=fs+"px"; }
-    });
-    const scale=1.7;
-    const canvas=await html2canvas(el,{scale:scale,backgroundColor:"#ffffff",useCORS:true});
     const {jsPDF}=window.jspdf;
     const pdf=new jsPDF({orientation:"landscape",unit:"mm",format:"a4"});
     const pw=pdf.internal.pageSize.getWidth(), ph=pdf.internal.pageSize.getHeight();
-    const elTop=el.getBoundingClientRect().top;
-    const yOf=n=> (n.getBoundingClientRect().top-elTop)*scale;
-    const yBot=n=> (n.getBoundingClientRect().bottom-elTop)*scale;
 
-    // Bandeau d'en-tête (logo + titre + en-têtes de colonnes) répété sur CHAQUE page.
-    const thead=el.querySelector("thead");
-    const headerH=Math.round(yBot(thead)); // du haut de la page (avec sa marge) jusqu'au bas des en-têtes
+    let render=await renderPrintable(sigPng, 1);
+    createdEls.push(render.el);
+    let pageHpx=Math.floor(render.canvas.width*ph/pw); // hauteur d'une page A4 en px canvas
 
-    // Coupes SÛRES : seulement entre deux salariés (jamais au milieu d'un salarié à
-    // plusieurs absences), + juste avant la légende et la signature.
-    const cuts=[];
-    el.querySelectorAll("tbody tr.emp-end").forEach(tr=>{ cuts.push(Math.round(yBot(tr))); });
-    el.querySelectorAll(".pdf-break").forEach(n=>{ cuts.push(Math.round(yOf(n))); });
-    cuts.push(canvas.height);
-    const breaks=[...new Set(cuts)].filter(v=>v>headerH).sort((a,b)=>a-b);
+    // Si le document ne depasse une page que de peu — typiquement la
+    // signature du directeur qui se retrouve seule sur une 2e page quasi
+    // vide — on resserre l'espacement des lignes pour tout faire tenir sur
+    // une seule page. On recalcule et re-resserre par petites touches
+    // (l'arrondi des paddings en px empêche souvent d'y arriver en un seul
+    // essai) jusqu'à ce que ça tienne, qu'on ne gagne plus rien, ou qu'on
+    // atteigne le plancher de lisibilité. Si le depassement est trop
+    // important (beaucoup de salariés/absences), on renonce et on garde la
+    // pagination normale pour ne pas rendre le texte illisible.
+    let padScale=1, tries=0;
+    while(render.canvas.height>pageHpx && padScale>0.5 && tries<4){
+      const bodyFull=render.canvas.height-render.headerH;
+      const availBody=pageHpx-render.headerH;
+      if(bodyFull<=availBody) break;
+      // Marge de 2% pour ne pas retomber exactement sur la limite a cause
+      // de l'arrondi des paddings en pixels entiers.
+      const next=Math.max(0.5, padScale*(availBody/bodyFull)*0.98);
+      if(next>=padScale-0.001) break; // plus de gain possible
+      padScale=next; tries++;
+      const shrunk=await renderPrintable(sigPng, padScale);
+      createdEls.push(shrunk.el);
+      render=shrunk;
+      pageHpx=Math.floor(render.canvas.width*ph/pw);
+    }
 
-    const pageHpx=Math.floor(canvas.width*ph/pw); // hauteur d'une page A4 en px canvas
+    const {canvas, headerH, breaks}=render;
     let bodyStart=headerH, first=true, guard=0;
     while(bodyStart<canvas.height-1 && guard++<400){
       const avail=pageHpx-headerH;                 // place pour les lignes sous l'en-tête
@@ -891,7 +930,7 @@ async function generatePDF(opts){
     if(opts.save!==false){ pdf.save(nomPdf); toast("PDF téléchargé ✓"); }
     return pdf.output("datauristring").split(",")[1];   // base64 (sans le préfixe data:)
   }catch(err){ console.error(err); toast("Erreur PDF — voir la console"); return null; }
-  finally{ el.remove(); }
+  finally{ createdEls.forEach(n=>n.remove()); }
 }
 
 /* =================================================================
