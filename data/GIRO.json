@@ -6,7 +6,7 @@
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "giro@groupe-edgard.com",
   "periode": {
-    "mois": 8,
+    "mois": 9,
     "annee": 2026
   },
   "jours_ouvres": null,
@@ -16,7 +16,7 @@
       "nom": "BŒUF",
       "prenom": "Anaïs",
       "tps": "41",
-      "transport": "20.8",
+      "transport": "21.4",
       "mutuelle": "O",
       "tr": "",
       "commentaires": "Vérifier tarif abonnement"
@@ -52,7 +52,7 @@
       "nom": "LANGLADE",
       "prenom": "Sylvain",
       "tps": "41",
-      "transport": "54.4",
+      "transport": "55.8",
       "mutuelle": "N",
       "tr": "",
       "commentaires": "Vérifier tarif abonnement"

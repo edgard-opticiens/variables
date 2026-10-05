@@ -6,7 +6,7 @@
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "ecume@groupe-edgard.com",
   "periode": {
-    "mois": 8,
+    "mois": 9,
     "annee": 2026
   },
   "jours_ouvres": null,
@@ -33,11 +33,11 @@
     {
       "nom": "DAVID",
       "prenom": "Camille",
-      "tps": "31",
+      "tps": "35",
       "transport": "",
       "mutuelle": "O",
       "tr": "",
-      "commentaires": "PTP DU 25/02/26 AU 11/09/26"
+      "commentaires": "passage 35h au 01/10/26"
     },
     {
       "nom": "DOGUET",

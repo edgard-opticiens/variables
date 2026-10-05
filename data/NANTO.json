@@ -6,7 +6,7 @@
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "nanto@groupe-edgard.com",
   "periode": {
-    "mois": 8,
+    "mois": 9,
     "annee": 2026
   },
   "jours_ouvres": null,
@@ -34,7 +34,7 @@
       "nom": "GANTIER",
       "prenom": "Sabrina",
       "tps": "41",
-      "transport": "54.9",
+      "transport": "56.5",
       "mutuelle": "O",
       "tr": "",
       "commentaires": "JUSTIFICATIF TRANSPORT A FOURNIR"
@@ -55,7 +55,7 @@
       "transport": "54.9",
       "mutuelle": "O",
       "tr": "",
-      "commentaires": "JUSTIFICATIF TRANSPORT A FOURNIR"
+      "commentaires": "JUSTIFICATIF TRANSPORT A FOURNIR\r\nFCO le 03/10/26"
     },
     {
       "nom": "MERCIER",
@@ -73,7 +73,7 @@
       "transport": "",
       "mutuelle": "O",
       "tr": "",
-      "commentaires": "TPT 20,50h (50%)du 31/08/26 AU 26/09/26"
+      "commentaires": ""
     },
     {
       "nom": "NOC",
@@ -82,7 +82,7 @@
       "transport": "",
       "mutuelle": "O",
       "tr": "",
-      "commentaires": "CDI au 01/09/26"
+      "commentaires": ""
     },
     {
       "nom": "RESENDE",
@@ -100,7 +100,7 @@
       "transport": "",
       "mutuelle": "N",
       "tr": "",
-      "commentaires": "CDI au 01/09/26"
+      "commentaires": ""
     },
     {
       "nom": "THOMAS",
@@ -109,13 +109,13 @@
       "transport": "",
       "mutuelle": "N",
       "tr": "",
-      "commentaires": "CDI au 01/09/26"
+      "commentaires": ""
     },
     {
       "nom": "VIRIOT",
       "prenom": "Jennifer",
       "tps": "41",
-      "transport": "53.9",
+      "transport": "54.9",
       "mutuelle": "O",
       "tr": "",
       "commentaires": "JUSTIFICATIF TRANSPORT A FOURNIR"

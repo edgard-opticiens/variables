@@ -6,7 +6,7 @@
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "ango@groupe-edgard.com",
   "periode": {
-    "mois": 8,
+    "mois": 9,
     "annee": 2026
   },
   "jours_ouvres": null,
@@ -28,7 +28,7 @@
       "transport": "",
       "mutuelle": "N",
       "tr": "",
-      "commentaires": "CDD Etudiant du 06/09/25 au 27/06/26"
+      "commentaires": "Ct Appr. Licence DEG du 01/09/26 au 31/08/27"
     },
     {
       "nom": "CHERBUY",
@@ -47,15 +47,6 @@
       "mutuelle": "O",
       "tr": "",
       "commentaires": ""
-    },
-    {
-      "nom": "BRISMONTIER",
-      "prenom": "Jeanne",
-      "tps": "35",
-      "transport": "",
-      "mutuelle": "N",
-      "tr": "",
-      "commentaires": "Ct Appr. Licence DEG du 01/09/26 au 31/08/27"
     },
     {
       "nom": "DUREL",
@@ -91,7 +82,7 @@
       "transport": "",
       "mutuelle": "N",
       "tr": "",
-      "commentaires": "Emb CDI au 01/09/26"
+      "commentaires": ""
     },
     {
       "nom": "JACQUOT",

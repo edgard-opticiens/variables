@@ -6,7 +6,7 @@
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "strabo@groupe-edgard.com",
   "periode": {
-    "mois": 8,
+    "mois": 9,
     "annee": 2026
   },
   "jours_ouvres": null,
@@ -42,6 +42,15 @@
     {
       "nom": "METZ",
       "prenom": "Sébastien",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "MEYER",
+      "prenom": "Morgane",
       "tps": "41",
       "transport": "",
       "mutuelle": "O",

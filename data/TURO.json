@@ -6,7 +6,7 @@
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "turo@groupe-edgard.com",
   "periode": {
-    "mois": 8,
+    "mois": 9,
     "annee": 2026
   },
   "jours_ouvres": null,
@@ -19,7 +19,7 @@
       "transport": "23",
       "mutuelle": "O",
       "tr": "",
-      "commentaires": "Ct Appr. BTS OL - 02/09/24 au 31/08/27 (rdbt)"
+      "commentaires": "Ct Appr. BTS OL - 02/09/24 au 31/08/27 (rdbt)\r\nJUSTIFICATIF TRANSPORT A FOURNIR"
     },
     {
       "nom": "ALEIXO",
@@ -29,15 +29,6 @@
       "mutuelle": "O",
       "tr": "",
       "commentaires": ""
-    },
-    {
-      "nom": "CARPI",
-      "prenom": "Valentine",
-      "tps": "41",
-      "transport": "",
-      "mutuelle": "O",
-      "tr": "",
-      "commentaires": "FCO au 30/09/26"
     },
     {
       "nom": "CHARPENTIER",
@@ -54,6 +45,15 @@
       "tps": "41",
       "transport": "",
       "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
+      "nom": "DOURY",
+      "prenom": "Inès",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "",
       "tr": "",
       "commentaires": ""
     },
@@ -163,7 +163,7 @@
       "transport": "",
       "mutuelle": "O",
       "tr": "",
-      "commentaires": ""
+      "commentaires": "A déduire CP sur Octobre"
     },
     {
       "nom": "PEREIRA",
@@ -211,13 +211,22 @@
       "commentaires": ""
     },
     {
+      "nom": "TOUBEAUX",
+      "prenom": "Sullivan",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "O",
+      "tr": "",
+      "commentaires": ""
+    },
+    {
       "nom": "FESNEAU",
       "prenom": "Adèle",
       "tps": "36",
       "transport": "",
       "mutuelle": "O",
       "tr": "",
-      "commentaires": "passage à 36h au 01/09/26"
+      "commentaires": ""
     },
     {
       "nom": "MARION-PERROT",

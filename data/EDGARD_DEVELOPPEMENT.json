@@ -6,11 +6,11 @@
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "edgard_developpement@groupe-edgard.com",
   "periode": {
-    "mois": 8,
+    "mois": 9,
     "annee": 2026
   },
   "jours_ouvres": null,
-  "tr": 21,
+  "tr": 22,
   "collaborateurs": [
     {
       "nom": "BOISSEAU",
@@ -109,7 +109,7 @@
       "transport": "",
       "mutuelle": "N",
       "tr": "",
-      "commentaires": ""
+      "commentaires": "80% au 01/09/2026"
     },
     {
       "nom": "MARCHAND",

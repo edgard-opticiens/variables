@@ -6,7 +6,7 @@
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "manso@groupe-edgard.com",
   "periode": {
-    "mois": 8,
+    "mois": 9,
     "annee": 2026
   },
   "jours_ouvres": null,
@@ -24,7 +24,7 @@
     {
       "nom": "GAUVIN",
       "prenom": "Léa",
-      "tps": "41",
+      "tps": "35",
       "transport": "",
       "mutuelle": "N",
       "tr": "",
@@ -37,7 +37,7 @@
       "transport": "",
       "mutuelle": "O",
       "tr": "",
-      "commentaires": "passage à 39h au 01/09/26"
+      "commentaires": ""
     },
     {
       "nom": "JEANNE",
@@ -51,7 +51,7 @@
     {
       "nom": "LETOURNEUR",
       "prenom": "Clément",
-      "tps": "40",
+      "tps": "41",
       "transport": "",
       "mutuelle": "O",
       "tr": "",

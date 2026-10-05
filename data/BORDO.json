@@ -6,21 +6,12 @@
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "bordo@groupe-edgard.com",
   "periode": {
-    "mois": 8,
+    "mois": 9,
     "annee": 2026
   },
   "jours_ouvres": null,
   "tr": null,
   "collaborateurs": [
-    {
-      "nom": "CASSANET",
-      "prenom": "Clémence",
-      "tps": "41",
-      "transport": "",
-      "mutuelle": "O",
-      "tr": "",
-      "commentaires": "FCO 12/09/26"
-    },
     {
       "nom": "DU MESNIL-ADELÉE",
       "prenom": "Emma",
@@ -37,7 +28,7 @@
       "transport": "",
       "mutuelle": "O",
       "tr": "",
-      "commentaires": "Emb CDI au 01/09/26"
+      "commentaires": ""
     },
     {
       "nom": "LUNETEAU",

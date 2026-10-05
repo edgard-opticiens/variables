@@ -6,7 +6,7 @@
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "jisam@groupe-edgard.com",
   "periode": {
-    "mois": 8,
+    "mois": 9,
     "annee": 2026
   },
   "jours_ouvres": null,
@@ -55,7 +55,7 @@
       "transport": "",
       "mutuelle": "N",
       "tr": "",
-      "commentaires": ""
+      "commentaires": "FCO le 15/10/26"
     },
     {
       "nom": "MARKEY",
@@ -64,7 +64,7 @@
       "transport": "",
       "mutuelle": "O",
       "tr": "",
-      "commentaires": "Emb CDI au 08/09/26"
+      "commentaires": ""
     },
     {
       "nom": "RABOUILLE",

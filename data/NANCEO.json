@@ -6,7 +6,7 @@
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "nanceo@groupe-edgard.com",
   "periode": {
-    "mois": 8,
+    "mois": 9,
     "annee": 2026
   },
   "jours_ouvres": null,
@@ -25,10 +25,10 @@
       "nom": "BURTÉ",
       "prenom": "Cécile",
       "tps": "36",
-      "transport": "",
+      "transport": "58.3",
       "mutuelle": "N",
       "tr": "",
-      "commentaires": "CDD du 10/06/26 au 31/12/26"
+      "commentaires": "CDD du 10/06/26 au 31/12/26\r\nJUSTIFICATIF TRANSPORT A FOURNIR"
     },
     {
       "nom": "HOFFMANN",
@@ -43,10 +43,10 @@
       "nom": "MASSICOT",
       "prenom": "Hugo",
       "tps": "41",
-      "transport": "",
+      "transport": "22",
       "mutuelle": "O",
       "tr": "",
-      "commentaires": ""
+      "commentaires": "JUSTIFICATIF TRANSPORT A FOURNIR"
     }
   ]
 }

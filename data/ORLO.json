@@ -6,7 +6,7 @@
   "rh_to": "ressources-humaines@groupe-edgard.com",
   "rh_cc": "orlo@groupe-edgard.com",
   "periode": {
-    "mois": 8,
+    "mois": 9,
     "annee": 2026
   },
   "jours_ouvres": null,
@@ -22,13 +22,22 @@
       "commentaires": ""
     },
     {
+      "nom": "BEZY",
+      "prenom": "Victor",
+      "tps": "41",
+      "transport": "",
+      "mutuelle": "",
+      "tr": "",
+      "commentaires": "CDI au 26/10/26"
+    },
+    {
       "nom": "MOREAU",
       "prenom": "Jade",
       "tps": "41",
       "transport": "",
       "mutuelle": "O",
       "tr": "",
-      "commentaires": ""
+      "commentaires": "FCO le 10/10/26"
     },
     {
       "nom": "ORINEL",
