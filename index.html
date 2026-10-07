@@ -166,10 +166,10 @@ body.modal-open{overflow:hidden;position:fixed;width:100%}
     <h1 id="gate-store">Variables de paie</h1>
     <p id="gate-sub">Sélectionnez votre magasin et saisissez votre code</p>
     <select id="store-select" class="gate-select"><option value="">— Choisir un magasin —</option></select>
-    <input id="pin" type="password" inputmode="numeric" maxlength="6" placeholder="Code à 4 chiffres" autocomplete="off">
+    <input id="pin" type="password" maxlength="40" placeholder="Code d'accès" autocomplete="off">
     <button id="pin-btn">Accéder</button>
     <div class="gate-err" id="pin-err"></div>
-    <div class="gate-note">Accès réservé aux directeurs de magasin.</div>
+    <div class="gate-note">Accès réservé aux directeurs de magasin et aux RH. Le code est vérifié par le serveur ; seules les données de votre magasin sont chargées.</div>
   </div>
 </div>
 
@@ -180,6 +180,7 @@ body.modal-open{overflow:hidden;position:fixed;width:100%}
       <div class="t1">Edgard Opticiens</div>
       <div class="t2">Variables de paie mensuelles</div>
     </div>
+    <button type="button" id="logout-btn" style="margin-left:auto;border:1.5px solid var(--line-strong);background:#fff;border-radius:9px;padding:7px 12px;font-family:inherit;font-weight:600;font-size:12.5px;cursor:pointer;color:var(--ink-soft)">Se déconnecter</button>
   </div>
 
   <div class="sheet" id="sheet">
@@ -286,21 +287,6 @@ body.modal-open{overflow:hidden;position:fixed;width:100%}
 let STORE = null;                 // chargé depuis data/<mag>.json
 let prevKey = null;
 
-/* Démo embarquée (si ouverture sans ?mag= ou hors ligne) */
-const EMBEDDED_DEMO = {
-  code:"BORDO", nom:"BORDO", pin:"1234",
-  rh_to:"ressources-humaines@groupe-edgard.com", rh_cc:"bordo@groupe-edgard.com",
-  periode:{mois:5,annee:2026}, jours_ouvres:null, tr:null, brand:"edgard",
-  collaborateurs:[
-    {nom:"CASSANET",prenom:"Clémence",tps:"41",transport:"",mutuelle:"O",tr:"",commentaires:""},
-    {nom:"DU MESNIL-ADELÉE",prenom:"Emma",tps:"41",transport:"49",mutuelle:"O",tr:"",commentaires:"REMBOURSEMENT SUR JUSTIFICATIF TRANSPORT"},
-    {nom:"HUGUET",prenom:"Caroline",tps:"38h30",transport:"",mutuelle:"O",tr:"",commentaires:""},
-    {nom:"LUNETEAU",prenom:"Stéphane",tps:"38h30",transport:"49",mutuelle:"O",tr:"",commentaires:"REMBOURSEMENT SUR JUSTIFICATIF TRANSPORT"},
-    {nom:"PLEKANEC",prenom:"Florian",tps:"41",transport:"",mutuelle:"O",tr:"",commentaires:"FCO au 16/05/26"},
-    {nom:"RICHARD",prenom:"Isabelle",tps:"39",transport:"",mutuelle:"O",tr:"",commentaires:""}
-  ]
-};
-
 /* ======================================================================
    CONFIG n8n — Étape 1 (envoi auto + archive centrale)
    Collez ici l'URL du webhook n8n (Production URL). Laissez vide ("")
@@ -367,71 +353,163 @@ const moisSel = $("mois");
 MOIS.forEach((m,i)=>{ const o=document.createElement("option"); o.value=i; o.textContent=m; moisSel.appendChild(o); });
 const now = new Date();
 
-/* ---------- ACCÈS : un seul lien, choix du magasin + code ---------- */
-let MODE = "dropdown";
-
-async function loadStoreByCode(code){
+/* ---------- ACCÈS SÉCURISÉ : le code est vérifié par le serveur (n8n) ----------
+   Directeur : code de son magasin -> il ne reçoit que le roster de son magasin.
+   RH : code RH -> accès à tous les magasins. Aucun code ni roster n'est stocké dans la page. */
+var N8N_AUTH_LOGIN = 'https://edgard-opticiens.app.n8n.cloud/webhook/auth-login';
+var N8N_ROSTER     = 'https://edgard-opticiens.app.n8n.cloud/webhook/variables-roster';
+var AUTH_KEY = 'edgard_auth_v2';
+function authGet(){
   try{
-    const r = await fetch(`data/${encodeURIComponent(code)}.json`, {cache:"no-store"});
-    if(r.ok) return await r.json();
-  }catch(e){}
-  if(code && EMBEDDED_DEMO.code === code) return EMBEDDED_DEMO;   // démo locale
-  return null;
+    var o=JSON.parse(localStorage.getItem(AUTH_KEY)||'null');
+    if(!o||!o.token||!o.magasin)return null;
+    if(Number(o.expire)<=Date.now()){authClear();return null;}
+    return o;
+  }catch(e){return null;}
 }
-async function loadIndex(){
-  try{
-    const r = await fetch("data/index.json", {cache:"no-store"});
-    if(r.ok) return await r.json();
-  }catch(e){}
-  return [{code:EMBEDDED_DEMO.code, nom:EMBEDDED_DEMO.nom}];      // démo locale
+function authSave(o){try{localStorage.setItem(AUTH_KEY,JSON.stringify(o));}catch(e){}}
+function authClear(){try{localStorage.removeItem(AUTH_KEY);}catch(e){}}
+function authPost(url,body){
+  return fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)})
+    .then(function(r){return r.json().catch(function(){return {ok:false,error:'reponse'};}).then(function(j){j.httpStatus=r.status;return j;});});
+}
+function authLogin(role,magasin,code){return authPost(N8N_AUTH_LOGIN,{role:role,magasin:magasin,code:code});}
+/* Compatibilité transitoire avec les outils pas encore migrés (empreinte stockée uniquement sur cet appareil) */
+var DIR_SESSION_KEY = 'edgard_dir_session_v1';
+function dirHash(s){var h1=0xdeadbeef,h2=0x41c6ce57;for(var i=0,c;i<s.length;i++){c=s.charCodeAt(i);h1=Math.imul(h1^c,2654435761);h2=Math.imul(h2^c,1597334677);}
+  h1=Math.imul(h1^(h1>>>16),2246822507)^Math.imul(h2^(h2>>>13),3266489909);h2=Math.imul(h2^(h2>>>16),2246822507)^Math.imul(h1^(h1>>>13),3266489909);
+  return (4294967296*(2097151&h2)+(h1>>>0)).toString(36);}
+function dirSessionSave(soc,pin){
+  try{localStorage.setItem(DIR_SESSION_KEY,JSON.stringify({soc:String(soc).toUpperCase(),h:dirHash(String(soc).toUpperCase()+':'+pin),t:Date.now()}));}catch(e){}
+}
+function dirLogout(){authClear();try{localStorage.removeItem(DIR_SESSION_KEY);}catch(e){} location.reload();}
+
+/* Lecture protégée du roster : si la session n'est plus valide, retour à l'écran de connexion */
+function rosterGet(code){
+  var a=authGet();
+  if(!a)return Promise.reject(new Error('session'));
+  return authPost(N8N_ROSTER,{token:a.token,action:'get',code:code||''}).then(function(j){
+    if(j&&j.ok)return j;
+    if(j&&(j.error==='session'||j.httpStatus===401)){authClear();location.reload();}
+    throw new Error((j&&j.error)||'lecture');
+  });
 }
 
-/* Ouverture directe depuis le tableau de bord RH : ?mag=CODE&pin=XXXX&periode=YYYY-MM
-   saute l'écran de code si le pin correspond, et pré-sélectionne la période. */
+var DIR_STORES = ["ANGO","BIARRO","BORDO","CAENPO","CHATO","CHEMILLO","CHOLO","DUNES","ECUME","FORMIO","GIRO","HAVRO","JISAM","LYONO","MANSO","MARAIS","MARSEILLO","MUDO","NANCEO","NANTO","NICEO","NIORTO","ORLO","REIMO","STRABO","TURO"];
+var RH_VALUE = "__RH__";
+
 const QS = new URLSearchParams(location.search);
-const AUTO_PIN = QS.get("pin");
+const AUTO_CODE = QS.get("mag");          // ouverture directe depuis le tableau de bord RH
 const AUTO_PERIODE = QS.get("periode");   // format "YYYY-MM"
 const EMBEDDED = window.parent && window.parent !== window;
+let GATE_STEP = "login";                  // "login" -> "pick" (RH : choix du magasin)
 
-async function bootstrap(){
-  const code = QS.get("mag");
-  if(code){                                   // lien direct éventuel (?mag=CODE)
-    MODE = "single";
-    STORE = await loadStoreByCode(code);
-    if(!STORE){ $("pin-err").textContent = "Magasin introuvable (" + code + ")."; return; }
-    $("store-select").style.display = "none";
-    $("gate-store").textContent = STORE.nom;
-    $("gate-sub").textContent = "Saisissez votre code d'accès";
-    if(AUTO_PIN && String(AUTO_PIN) === String(STORE.pin)){
-      $("pin").value = AUTO_PIN;
-      submitGate();
-    }
-  } else {                                    // mode normal : menu déroulant
-    MODE = "dropdown";
-    const list = await loadIndex();
-    list.sort((a,b)=>a.nom.localeCompare(b.nom));
-    const sel = $("store-select");
-    list.forEach(s=>{ const o=document.createElement("option"); o.value=s.code; o.textContent=s.nom; sel.appendChild(o); });
-  }
+function gateError(t){ $("pin-err").textContent = t || ""; }
+function fillSelect(items, first){
+  const sel = $("store-select"); sel.innerHTML = "";
+  const o0 = document.createElement("option"); o0.value=""; o0.textContent=first; sel.appendChild(o0);
+  items.forEach(it=>{ const o=document.createElement("option"); o.value=it.value; o.textContent=it.label; sel.appendChild(o); });
 }
-
-async function submitGate(){
-  let store = STORE;
-  if(MODE === "dropdown"){
-    const code = $("store-select").value;
-    if(!code){ $("pin-err").textContent = "Choisissez votre magasin."; return; }
-    store = await loadStoreByCode(code);
-    if(!store){ $("pin-err").textContent = "Magasin introuvable."; return; }
+function showLoginGate(){
+  GATE_STEP = "login";
+  $("gate").style.display = ""; $("app").style.display = "none"; $("actionbar").style.display = "none";
+  $("pin").style.display = ""; $("pin").value = ""; $("pin-btn").textContent = "Accéder";
+  if(AUTO_CODE){                           // lien direct RH : pas de choix de magasin
+    fillSelect([{value:RH_VALUE,label:"Ressources humaines (RH)"}], "— Connexion —");
+    $("store-select").value = RH_VALUE; $("store-select").style.display = "none";
+    $("gate-store").textContent = "Connexion RH";
+    $("gate-sub").textContent = "Saisissez le code RH";
+  } else {
+    const items = DIR_STORES.map(n=>({value:n,label:n}));
+    items.push({value:RH_VALUE,label:"Ressources humaines (RH)"});
+    fillSelect(items, "— Choisir un magasin —");
+    $("store-select").style.display = "";
+    $("gate-store").textContent = "Variables de paie";
+    $("gate-sub").textContent = "Sélectionnez votre magasin et saisissez votre code";
   }
-  if($("pin").value.trim() !== String(store.pin)){
-    $("pin-err").textContent = "Code incorrect."; $("pin").value=""; return;
-  }
+  gateError("");
+}
+function showPickGate(index){
+  GATE_STEP = "pick";
+  $("gate").style.display = ""; $("app").style.display = "none"; $("actionbar").style.display = "none";
+  $("pin").style.display = "none"; $("pin-btn").textContent = "Ouvrir";
+  fillSelect(index.map(s=>({value:s.code,label:s.nom})), "— Choisir un magasin —");
+  $("store-select").style.display = "";
+  $("gate-store").textContent = "Connexion RH";
+  $("gate-sub").textContent = "Choisissez le magasin à ouvrir";
+  gateError("");
+}
+function enterApp(store){
   STORE = store;
   $("gate").style.display="none"; $("app").style.display="block"; $("actionbar").style.display="block";
   startApp();
 }
+/* Session valide : le serveur renvoie le roster autorisé (DIR : son magasin ; RH : tous) */
+async function afterLogin(){
+  const a = authGet();
+  gateError("");
+  try{
+    if(a.role === "DIR"){
+      const j = await rosterGet("");
+      if(!j.index.length){ gateError("Aucune fiche disponible pour votre magasin ce mois-ci. Contactez les RH."); $("pin").value=""; return; }
+      const r = await rosterGet(j.index[0].code);
+      if(!r.store){ gateError("Fiche introuvable. Contactez les RH."); return; }
+      enterApp(r.store);
+    } else if(a.role === "RH"){
+      if(AUTO_CODE){
+        const r = await rosterGet(AUTO_CODE);
+        if(!r.store){ gateError("Magasin introuvable (" + AUTO_CODE + ")."); return; }
+        enterApp(r.store);
+      } else {
+        const j = await rosterGet("");
+        if(!j.index.length){ gateError("Aucun roster déposé pour l'instant."); return; }
+        showPickGate(j.index);
+      }
+    } else {
+      authClear(); showLoginGate(); gateError("Ce type d'accès ne permet pas d'ouvrir les variables.");
+    }
+  }catch(e){ gateError("Connexion au serveur impossible. Réessayez dans un instant."); }
+}
+async function bootstrap(){
+  if(authGet() && (authGet().role === "DIR" || authGet().role === "RH")){ showLoginGate(); await afterLogin(); return; }
+  showLoginGate();
+}
+async function submitGate(){
+  if(GATE_STEP === "pick"){
+    const code = $("store-select").value;
+    if(!code){ gateError("Choisissez un magasin."); return; }
+    try{
+      const r = await rosterGet(code);
+      if(!r.store){ gateError("Magasin introuvable."); return; }
+      enterApp(r.store);
+    }catch(e){ gateError("Connexion au serveur impossible. Réessayez dans un instant."); }
+    return;
+  }
+  const choix = $("store-select").value;
+  const code = $("pin").value.trim();
+  if(!choix){ gateError("Choisissez votre magasin."); return; }
+  if(!code){ gateError("Saisissez votre code."); return; }
+  $("pin-btn").disabled = true; gateError("Vérification…");
+  try{
+    const isRH = (choix === RH_VALUE);
+    const j = await authLogin(isRH ? "RH" : "DIR", isRH ? "RH" : choix, code);
+    if(j && j.ok){
+      authSave({token:j.token, role:j.role, magasin:j.magasin, expire:j.expire});
+      if(!isRH) dirSessionSave(choix, code);
+      $("pin").value = "";
+      await afterLogin();
+    } else if(j && j.error === "verrouille"){
+      gateError("Trop d'essais. Réessayez dans " + (j.minutes || 15) + " min."); $("pin").value="";
+    } else {
+      gateError("Code incorrect."); $("pin").value="";
+    }
+  }catch(e){ gateError("Connexion au serveur impossible. Réessayez dans un instant."); }
+  $("pin-btn").disabled = false;
+}
 $("pin-btn").onclick = submitGate;
 $("pin").addEventListener("keydown", e=>{ if(e.key==="Enter") submitGate(); });
+$("store-select").addEventListener("change", ()=>{ if(GATE_STEP==="pick") submitGate(); });
+
 
 /* =================================================================
    PERSISTANCE PAR PÉRIODE (clé = magasin + mois/année)
@@ -466,7 +544,7 @@ function cloudSave(now){
       const _total=state.length, _sc=sigCount();
       const body={ cle:cleFor(), magasin_code:STORE.code, magasin_nom:STORE.nom, periode:perFor(),
                    total_salaries:_total, signatures_ok:_sc, complet:(_total>0 && _sc===_total),
-                   etat:LZString.compressToEncodedURIComponent(JSON.stringify(snap)), maj:new Date().toISOString() };
+                   etat:LZString.compressToEncodedURIComponent(JSON.stringify(snap)), maj:new Date().toISOString(), token:(authGet()||{}).token||"" };
       const res=await fetch(SYNC_SAVE_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});
       setSyncBadge(res.ok?"Enregistré ✓":"Erreur d'enregistrement");
     }catch(e){ console.warn(e); setSyncBadge("Hors ligne — non enregistré"); }
@@ -478,7 +556,7 @@ async function cloudLoad(){
   if(!SYNC_LOAD_URL || !STORE || !window.LZString) return;
   let localT=0; try{ const raw=localStorage.getItem(periodKey()); if(raw) localT=(JSON.parse(raw)._t||0); }catch(e){}
   try{
-    const res=await fetch(SYNC_LOAD_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({cle:cleFor()})});
+    const res=await fetch(SYNC_LOAD_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({cle:cleFor(), token:(authGet()||{}).token||""})});
     if(!res.ok) return;
     const d=await res.json().catch(()=>null);
     const comp = d ? (d.etat||(d.body&&d.body.etat)) : null;
@@ -745,14 +823,11 @@ $("reset-btn").onclick=()=>{
    PDF (paysage A4, multi-pages)
    ================================================================= */
 function fmtDate(d){ if(!d) return ""; const p=(""+d).split("-"); return p.length===3?`${p[2]}/${p[1]}/${p[0]}`:d; }
-function buildPrintable(sigPng,padScale){
-  // padScale (<1) resserre les lignes du tableau pour faire tenir le document
-  // sur une seule page quand il ne depasse que de peu (voir generatePDF).
-  padScale = padScale || 1;
+function buildPrintable(sigPng){
   const moisTxt=MOIS[+moisSel.value], annee=$("annee").value;
   const dirNom=$("dir-nom").value, dirPrenom=$("dir-prenom").value;
   const B="border:1px solid #d9d2c4;padding:6px 6px;word-break:break-word;overflow-wrap:anywhere;";
-  const Babs=`border:1px solid #d9d2c4;padding:${Math.round(28*padScale)}px 6px;word-break:break-word;overflow-wrap:anywhere;`;
+  const Babs="border:1px solid #d9d2c4;padding:28px 6px;word-break:break-word;overflow-wrap:anywhere;";
   const TH="padding:5px 4px;font-size:8px;font-weight:700;vertical-align:bottom;overflow-wrap:break-word;line-height:1.2;";
   const rows = state.map((c,gi)=>{
     const k=c.absences.length;
@@ -798,14 +873,14 @@ function buildPrintable(sigPng,padScale){
       </thead>
       <tbody>${rows}</tbody>
     </table>
-    <div class="pdf-break" style="margin-top:${Math.round(14*Math.max(padScale,0.7))}px;font-size:10.5px;color:#16242a;line-height:1.7">
+    <div class="pdf-break" style="margin-top:14px;font-size:10.5px;color:#16242a;line-height:1.7">
       * Congés Payés = CP&nbsp;&nbsp;&nbsp;&nbsp;Congés Sans Solde = CSS&nbsp;&nbsp;&nbsp;&nbsp;Maladie = AM&nbsp;&nbsp;&nbsp;&nbsp;Maternité = MAT&nbsp;&nbsp;&nbsp;&nbsp;Paternité = PAT&nbsp;&nbsp;&nbsp;&nbsp;Congé Parental = PAR&nbsp;&nbsp;&nbsp;&nbsp;Accident = AT&nbsp;&nbsp;&nbsp;&nbsp;Evènement familial = EVT&nbsp;&nbsp;&nbsp;&nbsp;Absence non rémunérée = ANR&nbsp;&nbsp;&nbsp;&nbsp;Congé Révision = CR
       <div style="margin-top:6px;font-weight:700;color:#c62828">* Merci de joindre tous les mois le justificatif d'abonnement transport en commun pour les collaborateurs concernés. Si arrêt de l'abonnement, le noter dans la colonne commentaires. Seuls les abonnements transport en commun sont remboursables (les tickets individuels sont exclus) dans la limite du mois M-1.</div>
     </div>
-    <div class="pdf-break" style="margin-top:${Math.round(22*Math.max(padScale,0.7))}px;display:flex;justify-content:flex-end">
+    <div class="pdf-break" style="margin-top:22px;display:flex;justify-content:flex-end">
       <div style="text-align:center;width:300px">
         <div style="font-size:12px;color:#4a5b60;margin-bottom:4px">Signature du Responsable — ${esc(dirPrenom)} ${esc(dirNom)}</div>
-        <div style="border:1px solid #bcae96;border-radius:8px;height:${Math.round(110*Math.max(padScale,0.75))}px;display:flex;align-items:center;justify-content:center">
+        <div style="border:1px solid #bcae96;border-radius:8px;height:110px;display:flex;align-items:center;justify-content:center">
           ${sigPng.dir?`<img src="${sigPng.dir}" style="max-height:100px;max-width:280px">`:""}
         </div>
       </div>
@@ -839,76 +914,40 @@ async function rasterizeSigs(){
   if(dirSig){ out.dir=await svgToPng(dirSig,312,138); }
   return out;
 }
-// Construit et rasterise le document imprimable a un niveau de compression
-// (padScale) donne. Retourne tout ce qu'il faut pour le paginer ; l'appelant
-// est responsable de retirer render.el du DOM une fois termine.
-async function renderPrintable(sigPng, padScale){
-  const el=buildPrintable(sigPng, padScale);
-  // Ajuste la police des Nom/Prénom pour qu'ils tiennent sur une seule ligne.
-  el.querySelectorAll(".fit").forEach(td=>{
-    const span=td.firstElementChild; if(!span) return;
-    const avail=td.clientWidth-12; let fs=11, g=0;
-    span.style.fontSize=fs+"px";
-    while(span.offsetWidth>avail && fs>6 && g++<40){ fs-=0.5; span.style.fontSize=fs+"px"; }
-  });
-  const scale=1.7;
-  const canvas=await html2canvas(el,{scale:scale,backgroundColor:"#ffffff",useCORS:true});
-  const elTop=el.getBoundingClientRect().top;
-  const yOf=n=> (n.getBoundingClientRect().top-elTop)*scale;
-  const yBot=n=> (n.getBoundingClientRect().bottom-elTop)*scale;
-
-  // Bandeau d'en-tête (logo + titre + en-têtes de colonnes) répété sur CHAQUE page.
-  const thead=el.querySelector("thead");
-  const headerH=Math.round(yBot(thead)); // du haut de la page (avec sa marge) jusqu'au bas des en-têtes
-
-  // Coupes SÛRES : seulement entre deux salariés (jamais au milieu d'un salarié à
-  // plusieurs absences), + juste avant la légende et la signature.
-  const cuts=[];
-  el.querySelectorAll("tbody tr.emp-end").forEach(tr=>{ cuts.push(Math.round(yBot(tr))); });
-  el.querySelectorAll(".pdf-break").forEach(n=>{ cuts.push(Math.round(yOf(n))); });
-  cuts.push(canvas.height);
-  const breaks=[...new Set(cuts)].filter(v=>v>headerH).sort((a,b)=>a-b);
-  return {el, canvas, headerH, breaks};
-}
 async function generatePDF(opts){
   opts=opts||{};
   const sigPng=await rasterizeSigs();
-  const createdEls=[];
+  const el=buildPrintable(sigPng);
   try{
+    // Ajuste la police des Nom/Prénom pour qu'ils tiennent sur une seule ligne.
+    el.querySelectorAll(".fit").forEach(td=>{
+      const span=td.firstElementChild; if(!span) return;
+      const avail=td.clientWidth-12; let fs=11, g=0;
+      span.style.fontSize=fs+"px";
+      while(span.offsetWidth>avail && fs>6 && g++<40){ fs-=0.5; span.style.fontSize=fs+"px"; }
+    });
+    const scale=1.7;
+    const canvas=await html2canvas(el,{scale:scale,backgroundColor:"#ffffff",useCORS:true});
     const {jsPDF}=window.jspdf;
     const pdf=new jsPDF({orientation:"landscape",unit:"mm",format:"a4"});
     const pw=pdf.internal.pageSize.getWidth(), ph=pdf.internal.pageSize.getHeight();
+    const elTop=el.getBoundingClientRect().top;
+    const yOf=n=> (n.getBoundingClientRect().top-elTop)*scale;
+    const yBot=n=> (n.getBoundingClientRect().bottom-elTop)*scale;
 
-    let render=await renderPrintable(sigPng, 1);
-    createdEls.push(render.el);
-    let pageHpx=Math.floor(render.canvas.width*ph/pw); // hauteur d'une page A4 en px canvas
+    // Bandeau d'en-tête (logo + titre + en-têtes de colonnes) répété sur CHAQUE page.
+    const thead=el.querySelector("thead");
+    const headerH=Math.round(yBot(thead)); // du haut de la page (avec sa marge) jusqu'au bas des en-têtes
 
-    // Si le document ne depasse une page que de peu — typiquement la
-    // signature du directeur qui se retrouve seule sur une 2e page quasi
-    // vide — on resserre l'espacement des lignes pour tout faire tenir sur
-    // une seule page. On recalcule et re-resserre par petites touches
-    // (l'arrondi des paddings en px empêche souvent d'y arriver en un seul
-    // essai) jusqu'à ce que ça tienne, qu'on ne gagne plus rien, ou qu'on
-    // atteigne le plancher de lisibilité. Si le depassement est trop
-    // important (beaucoup de salariés/absences), on renonce et on garde la
-    // pagination normale pour ne pas rendre le texte illisible.
-    let padScale=1, tries=0;
-    while(render.canvas.height>pageHpx && padScale>0.5 && tries<4){
-      const bodyFull=render.canvas.height-render.headerH;
-      const availBody=pageHpx-render.headerH;
-      if(bodyFull<=availBody) break;
-      // Marge de 2% pour ne pas retomber exactement sur la limite a cause
-      // de l'arrondi des paddings en pixels entiers.
-      const next=Math.max(0.5, padScale*(availBody/bodyFull)*0.98);
-      if(next>=padScale-0.001) break; // plus de gain possible
-      padScale=next; tries++;
-      const shrunk=await renderPrintable(sigPng, padScale);
-      createdEls.push(shrunk.el);
-      render=shrunk;
-      pageHpx=Math.floor(render.canvas.width*ph/pw);
-    }
+    // Coupes SÛRES : seulement entre deux salariés (jamais au milieu d'un salarié à
+    // plusieurs absences), + juste avant la légende et la signature.
+    const cuts=[];
+    el.querySelectorAll("tbody tr.emp-end").forEach(tr=>{ cuts.push(Math.round(yBot(tr))); });
+    el.querySelectorAll(".pdf-break").forEach(n=>{ cuts.push(Math.round(yOf(n))); });
+    cuts.push(canvas.height);
+    const breaks=[...new Set(cuts)].filter(v=>v>headerH).sort((a,b)=>a-b);
 
-    const {canvas, headerH, breaks}=render;
+    const pageHpx=Math.floor(canvas.width*ph/pw); // hauteur d'une page A4 en px canvas
     let bodyStart=headerH, first=true, guard=0;
     while(bodyStart<canvas.height-1 && guard++<400){
       const avail=pageHpx-headerH;                 // place pour les lignes sous l'en-tête
@@ -930,7 +969,7 @@ async function generatePDF(opts){
     if(opts.save!==false){ pdf.save(nomPdf); toast("PDF téléchargé ✓"); }
     return pdf.output("datauristring").split(",")[1];   // base64 (sans le préfixe data:)
   }catch(err){ console.error(err); toast("Erreur PDF — voir la console"); return null; }
-  finally{ createdEls.forEach(n=>n.remove()); }
+  finally{ el.remove(); }
 }
 
 /* =================================================================
@@ -985,7 +1024,7 @@ $("btn-send").onclick=async ()=>{
   if(WEBHOOK_URL){
     // Envoi automatique vers n8n (avec le PDF joint), repli e-mail si indisponible.
     toast("Envoi en cours…");
-    const payload=buildPayload();
+    const payload=buildPayload(); payload.token=(authGet()||{}).token||"";
     try{ payload.pdf_base64=await generatePDF({save:false}); payload.pdf_nom=`Variables_${STORE.code}_${MOIS[+moisSel.value]}_${$("annee").value}.pdf`; }
     catch(e){ console.error(e); }
     try{
@@ -1038,6 +1077,7 @@ function startApp(){
   loadPeriod();
   refreshHist();
 }
+$("logout-btn").onclick = dirLogout;
 bootstrap();
 </script>
 </body>
