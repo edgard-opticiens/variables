@@ -166,10 +166,10 @@ body.modal-open{overflow:hidden;position:fixed;width:100%}
     <h1 id="gate-store">Variables de paie</h1>
     <p id="gate-sub">Sélectionnez votre magasin et saisissez votre code</p>
     <select id="store-select" class="gate-select"><option value="">— Choisir un magasin —</option></select>
-    <input id="pin" type="password" maxlength="40" placeholder="Code d'accès" autocomplete="off">
+    <input id="pin" type="password" maxlength="40" placeholder="Code d'accès du magasin" autocomplete="off">
     <button id="pin-btn">Accéder</button>
     <div class="gate-err" id="pin-err"></div>
-    <div class="gate-note">Accès réservé aux directeurs de magasin et aux RH. Le code est vérifié par le serveur ; seules les données de votre magasin sont chargées.</div>
+    <div class="gate-note">Accès réservé aux équipes du magasin et aux RH. Le code est vérifié par le serveur ; seules les données de votre magasin sont chargées.</div>
   </div>
 </div>
 
@@ -354,7 +354,7 @@ MOIS.forEach((m,i)=>{ const o=document.createElement("option"); o.value=i; o.tex
 const now = new Date();
 
 /* ---------- ACCÈS SÉCURISÉ : le code est vérifié par le serveur (n8n) ----------
-   Directeur : code de son magasin -> il ne reçoit que le roster de son magasin.
+   Magasin : code d'accès du magasin (comme avant) -> on ne reçoit que la fiche de ce magasin.
    RH : code RH -> accès à tous les magasins. Aucun code ni roster n'est stocké dans la page. */
 var N8N_AUTH_LOGIN = 'https://edgard-opticiens.app.n8n.cloud/webhook/auth-login';
 var N8N_ROSTER     = 'https://edgard-opticiens.app.n8n.cloud/webhook/variables-roster';
@@ -395,7 +395,7 @@ function rosterGet(code){
   });
 }
 
-var DIR_STORES = ["ANGO","BIARRO","BORDO","CAENPO","CHATO","CHEMILLO","CHOLO","DUNES","ECUME","FORMIO","GIRO","HAVRO","JISAM","LYONO","MANSO","MARAIS","MARSEILLO","MUDO","NANCEO","NANTO","NICEO","NIORTO","ORLO","REIMO","STRABO","TURO"];
+var DIR_STORES = ["ANGO","BIARRO","BORDO","CAENPO","CHATO","CHEMILLO","CHOLO","DUNES","ECUME","EDGARD_DEVELOPPEMENT","EDGARD_DEV_SERVICE_COM","FORMIO","GIRO","HAVRO","JISAM","LYONO","MANSO","MARAIS","MARSEILLO","MUDO","NANCEO","NANTO","NICEO","NIORTO","ORLO","REIMO","STRABO","TURO"];
 var RH_VALUE = "__RH__";
 
 const QS = new URLSearchParams(location.search);
@@ -420,7 +420,7 @@ function showLoginGate(){
     $("gate-store").textContent = "Connexion RH";
     $("gate-sub").textContent = "Saisissez le code RH";
   } else {
-    const items = DIR_STORES.map(n=>({value:n,label:n}));
+    const items = DIR_STORES.map(n=>({value:n,label:n.replace(/_/g," ")}));
     items.push({value:RH_VALUE,label:"Ressources humaines (RH)"});
     fillSelect(items, "— Choisir un magasin —");
     $("store-select").style.display = "";
@@ -449,7 +449,7 @@ async function afterLogin(){
   const a = authGet();
   gateError("");
   try{
-    if(a.role === "DIR"){
+    if(a.role === "DIR" || a.role === "VAR"){
       const j = await rosterGet("");
       if(!j.index.length){ gateError("Aucune fiche disponible pour votre magasin ce mois-ci. Contactez les RH."); $("pin").value=""; return; }
       const r = await rosterGet(j.index[0].code);
@@ -471,7 +471,7 @@ async function afterLogin(){
   }catch(e){ gateError("Connexion au serveur impossible. Réessayez dans un instant."); }
 }
 async function bootstrap(){
-  if(authGet() && (authGet().role === "DIR" || authGet().role === "RH")){ showLoginGate(); await afterLogin(); return; }
+  if(authGet() && (authGet().role === "DIR" || authGet().role === "VAR" || authGet().role === "RH")){ showLoginGate(); await afterLogin(); return; }
   showLoginGate();
 }
 async function submitGate(){
@@ -492,10 +492,9 @@ async function submitGate(){
   $("pin-btn").disabled = true; gateError("Vérification…");
   try{
     const isRH = (choix === RH_VALUE);
-    const j = await authLogin(isRH ? "RH" : "DIR", isRH ? "RH" : choix, code);
+    const j = await authLogin(isRH ? "RH" : "VAR", isRH ? "RH" : choix, code);
     if(j && j.ok){
       authSave({token:j.token, role:j.role, magasin:j.magasin, expire:j.expire});
-      if(!isRH) dirSessionSave(choix, code);
       $("pin").value = "";
       await afterLogin();
     } else if(j && j.error === "verrouille"){
