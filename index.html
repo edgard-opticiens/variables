@@ -372,6 +372,20 @@ function authGet(){
 }
 function authSave(o){try{localStorage.setItem(AUTH_KEY,JSON.stringify(o));}catch(e){}}
 function authClear(){try{localStorage.removeItem(AUTH_KEY);}catch(e){}}
+/* Session absente/expirée au moment d'enregistrer : on prévient au lieu d'envoyer un jeton vide
+   (qui échoue côté serveur et déclenche une alerte n8n). Le bandeau devient cliquable pour se
+   reconnecter sans perdre la saisie en cours (tout est déjà conservé dans le navigateur). -- 2026-10-15 */
+function authOrWarn(){
+  const a = authGet();
+  const b = $("sync-badge");
+  if(!a){
+    setSyncBadge("⚠️ Session expirée — cliquez ici pour vous reconnecter");
+    if(b){ b.style.cursor="pointer"; b.onclick=function(){ showLoginGate(); }; }
+  } else if(b && b.onclick){
+    b.onclick=null; b.style.cursor="";
+  }
+  return a;
+}
 function authPost(url,body){
   return fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)})
     .then(function(r){return r.json().catch(function(){return {ok:false,error:'reponse'};}).then(function(j){j.httpStatus=r.status;return j;});});
@@ -545,14 +559,17 @@ let _cloudT=null;
 function cloudSave(now){
   if(!SYNC_SAVE_URL || !STORE || !window.LZString) return;
   const run=async ()=>{
+    const a = authOrWarn();
+    if(!a) return;   // session absente : on ne tente pas un envoi voué à l'échec (bandeau déjà mis à jour)
     setSyncBadge("Enregistrement…");
     try{
       const snap=buildSnapshot();
       const _total=state.length, _sc=sigCount();
       const body={ cle:cleFor(), magasin_code:STORE.code, magasin_nom:STORE.nom, periode:perFor(),
                    total_salaries:_total, signatures_ok:_sc, complet:(_total>0 && _sc===_total),
-                   etat:LZString.compressToEncodedURIComponent(JSON.stringify(snap)), maj:new Date().toISOString(), token:(authGet()||{}).token||"" };
+                   etat:LZString.compressToEncodedURIComponent(JSON.stringify(snap)), maj:new Date().toISOString(), token:a.token };
       const res=await fetch(SYNC_SAVE_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});
+      if(res.status===401){ authClear(); authOrWarn(); return; }
       setSyncBadge(res.ok?"Enregistré ✓":"Erreur d'enregistrement");
     }catch(e){ console.warn(e); setSyncBadge("Hors ligne — non enregistré"); }
   };
@@ -561,9 +578,11 @@ function cloudSave(now){
 }
 async function cloudLoad(){
   if(!SYNC_LOAD_URL || !STORE || !window.LZString) return;
+  const a = authOrWarn();
+  if(!a) return;    // session absente dès l'ouverture : on ne tente pas l'appel, le bandeau le signale
   let localT=0; try{ const raw=localStorage.getItem(periodKey()); if(raw) localT=(JSON.parse(raw)._t||0); }catch(e){}
   try{
-    const res=await fetch(SYNC_LOAD_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({cle:cleFor(), token:(authGet()||{}).token||""})});
+    const res=await fetch(SYNC_LOAD_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({cle:cleFor(), token:a.token})});
     if(!res.ok) return;
     const d=await res.json().catch(()=>null);
     const comp = d ? (d.etat||(d.body&&d.body.etat)) : null;
@@ -1056,13 +1075,27 @@ $("btn-send").onclick=async ()=>{
   if(!(periodOk()&&dirOk())){ toast("Période et signature responsable requises."); return; }
 
   if(WEBHOOK_URL){
+    // Session requise avant tout envoi : un jeton vide est rejeté par le serveur et ne fait
+    // que déclencher une alerte d'erreur, sans jamais prévenir l'utilisateur de la vraie cause. -- 2026-10-15
+    const a0 = authGet();
+    if(!a0){
+      toast("Session expirée — reconnectez-vous puis renvoyez (rien n'est perdu).");
+      showLoginGate();
+      return;
+    }
     // Envoi automatique vers n8n (avec le PDF joint), repli e-mail si indisponible.
     toast("Envoi en cours…");
-    const payload=buildPayload(); payload.token=(authGet()||{}).token||"";
+    const payload=buildPayload(); payload.token=a0.token;
     try{ payload.pdf_base64=await generatePDF({save:false}); payload.pdf_nom=`Variables_${STORE.code}_${MOIS[+moisSel.value]}_${$("annee").value}.pdf`; }
     catch(e){ console.error(e); }
     try{
       const res=await fetch(WEBHOOK_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
+      if(res.status===401){
+        authClear();
+        toast("Session expirée — reconnectez-vous puis renvoyez (rien n'est perdu).");
+        showLoginGate();
+        return;
+      }
       if(!res.ok) throw new Error("HTTP "+res.status);
       toast("Variable envoyée aux RH ✓");
       if(EMBEDDED){
