@@ -549,7 +549,13 @@ function freshState(){
 }
 function buildSnapshot(){ return { state, dirSig, dirNom:$("dir-nom").value, dirPrenom:$("dir-prenom").value, _t:Date.now() }; }
 function saveTo(key){ try{ localStorage.setItem(key, JSON.stringify(buildSnapshot())); }catch(e){} }
-function save(){ saveTo(periodKey()); if(SYNC_SAVE_URL) setSyncBadge("Modifications non enregistrées — cliquez sur 💾"); }
+// Avant ce correctif, save() n'ecrivait qu'en local (localStorage) et affichait juste un badge
+// "cliquez sur 💾" : si le responsable ne pensait pas a cliquer sur Enregistrer, la saisie restait
+// coincee sur son appareil et n'atteignait jamais le cloud (donc RH ne la voyait jamais). cloudSave()
+// sans argument "now" est deja debounce (5s, cf. plus bas) : on peut donc l'appeler ici, a chaque
+// modification, sans spammer le webhook — ca remplace le declenchement manuel par un enregistrement
+// automatique, le bouton 💾 restant disponible pour forcer un enregistrement immediat.
+function save(){ saveTo(periodKey()); if(SYNC_SAVE_URL) cloudSave(false); }
 
 /* ===== Étape 2 : synchronisation de l'état en cours (cloud n8n) ===== */
 function perFor(){ return `${$("annee").value}-${String(+moisSel.value+1).padStart(2,"0")}`; }
