@@ -107,18 +107,24 @@ const RH_TO="ressources-humaines@groupe-edgard.com";
 // Adresses RH en copie par magasin (optionnel) ; défaut : <code>@groupe-edgard.com
 const RH_MAILS={ /* "BORDO":"bordeaux@groupe-edgard.com", */ };
 
-const norm=s=>(s==null?"":(""+s)).normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/\s+/g," ").trim();
+const norm=s=>(s==null?"":(""+s)).normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase().replace(/\s+/g," ").trim();
 const cellStr=v=>{ if(v==null)return""; if(typeof v==="number")return String(v); return (""+v).trim(); };
 const codeOf=name=>name.replace(/[^A-Za-z0-9]+/g,"_").replace(/^_+|_+$/g,"").toUpperCase();
 function pinFor(code){ let h=0; for(const ch of code) h=(h*31+ch.charCodeAt(0))>>>0; return String(h%10000).padStart(4,"0"); }
 // Enseigne par magasin : Edgard Opticiens, sinon Générale d'Optique
-const EDGARD_CODES=new Set(["EDGARD_DEVELOPPEMENT","EDGARD_DEV_SERVICE_COM","ANGO","BIARRO","BORDO","CAENPO","GIRO","HAVRO","JISAM","LYONO","MANSO","MARSEILLO","NANCEO","NANTO","NICEO","ORLO","REIMO","STRABO","TURO"]);
+// (2026-10-24) EDGARD_DEV_NANTES et EDGARD_DEV_TOURS ajoutés : ils manquaient tous les deux,
+// ce qui faisait basculer leur enseigne sur "generale" par défaut (impact purement visuel —
+// logo affiché côté outil ; le decompte des jours de CP n'utilise pas ce paramètre).
+const EDGARD_CODES=new Set(["EDGARD_DEVELOPPEMENT","EDGARD_DEV_SERVICE_COM","EDGARD_DEV_NANTES","EDGARD_DEV_TOURS","ANGO","BIARRO","BORDO","CAENPO","GIRO","HAVRO","JISAM","LYONO","MANSO","MARSEILLO","NANCEO","NANTO","NICEO","ORLO","REIMO","STRABO","TURO"]);
 function brandFor(code){ return EDGARD_CODES.has(code) ? "edgard" : "generale"; }
 // Magasins/sites volontairement exclus du portail self-service (le RH prépare et fait signer
 // la fiche à la main, hors de cet outil, pour ces sites) : chaque entrée est une liste de mots
 // (normalisés, sans accent) qui doivent TOUS apparaître dans le nom de l'onglet Excel pour que
 // ce site soit écarté avant l'envoi au serveur.
-const SITES_EXCLUS_PORTAIL=[["edgard","dev","tours"]];
+// (2026-10-24) Edgard Dev Tours retiré de cette liste : il passe en self-service comme Nantes,
+// avec saisie centralisée par le RH (décision du 24/10). La liste reste vide mais en place pour
+// un futur site qu'on voudrait traiter à la main de la même façon.
+const SITES_EXCLUS_PORTAIL=[];
 function estExcluDuPortail(name){
   const n=norm(name);
   return SITES_EXCLUS_PORTAIL.some(mots=>mots.every(mot=>n.includes(mot)));
