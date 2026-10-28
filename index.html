@@ -96,6 +96,8 @@ tbody input[type=date]{min-width:104px;font-size:11.5px}
 .sig-check{color:var(--ok);font-weight:800;font-size:13px}
 .add-abs{display:inline-block;margin-top:6px;border:1px dashed var(--accent);color:var(--accent);background:#fff;border-radius:7px;padding:3px 9px;font-size:11px;font-weight:700;cursor:pointer;font-family:"Hanken Grotesk"}
 .add-abs:hover{background:var(--accent-soft)}
+.rm-emp{display:inline-block;margin-top:6px;margin-left:6px;border:1px dashed #c62828;color:#c62828;background:#fff;border-radius:7px;padding:3px 9px;font-size:11px;font-weight:700;cursor:pointer;font-family:"Hanken Grotesk"}
+.rm-emp:hover{background:#fbe9e9}
 .rm-abs{border:none;background:var(--warn-soft);color:var(--warn);border-radius:6px;width:20px;height:20px;line-height:1;font-weight:800;cursor:pointer;margin-right:6px;vertical-align:middle}
 .rm-abs:hover{background:#f0d9c9}
 
@@ -346,6 +348,8 @@ function autoCP(g,a){
   }
 }
 let state = [];
+let removedKeys = [];   // "nom|prenom" des collaborateurs retirés de la fiche par les RH ce mois-ci
+                         // (ex : personne partie, oubliée dans le fichier source déposé par admin.html)
 let dirSig = null;
 
 const $ = id => document.getElementById(id);
@@ -541,13 +545,13 @@ $("store-select").addEventListener("change", ()=>{ if(GATE_STEP==="pick") submit
    ================================================================= */
 function periodKey(){ return `edgard_var_${STORE.code}_${$("annee").value}-${String(+moisSel.value+1).padStart(2,"0")}`; }
 function freshState(){
-  return (STORE.collaborateurs||[]).map(c=>({
+  return (STORE.collaborateurs||[]).filter(c=>removedKeys.indexOf(c.nom+"|"+c.prenom)===-1).map(c=>({
     nom:c.nom, prenom:c.prenom, tps:c.tps||"", transport:c.transport||"",
     mutuelle:c.mutuelle||"", tr:c.tr||"", commentaires:c.commentaires||"",
     sig:null, absences:[blankAbs()]
   }));
 }
-function buildSnapshot(){ return { state, dirSig, dirNom:$("dir-nom").value, dirPrenom:$("dir-prenom").value, _t:Date.now() }; }
+function buildSnapshot(){ return { state, removed:removedKeys, dirSig, dirNom:$("dir-nom").value, dirPrenom:$("dir-prenom").value, _t:Date.now() }; }
 function saveTo(key){ try{ localStorage.setItem(key, JSON.stringify(buildSnapshot())); }catch(e){} }
 // Avant ce correctif, save() n'ecrivait qu'en local (localStorage) et affichait juste un badge
 // "cliquez sur 💾" : si le responsable ne pensait pas a cliquer sur Enregistrer, la saisie restait
@@ -600,16 +604,27 @@ async function cloudLoad(){
   }catch(e){ console.warn(e); }
 }
 function applySnapshot(d){
+  // removedKeys doit etre a jour AVANT freshState() : une personne retiree (puis sauvegardee,
+  // localement ou dans le cloud) ne doit pas reapparaitre a la prochaine ouverture de la fiche,
+  // meme si elle est toujours presente dans le fichier source (roster) depose par admin.html.
+  removedKeys = (d && d.removed) || [];
   const map={}; (d.state||[]).forEach(e=>{ map[e.nom+"|"+e.prenom]=e; });
-  state.forEach(c=>{ const e=map[c.nom+"|"+c.prenom]; if(e){ c.absences=(e.absences&&e.absences.length)?e.absences:[blankAbs()]; c.sig=e.sig||null;
-    c.transport=e.transport!=null?e.transport:c.transport; c.mutuelle=e.mutuelle!=null?e.mutuelle:c.mutuelle;
-    c.tr=e.tr!=null?e.tr:c.tr; c.commentaires=e.commentaires!=null?e.commentaires:c.commentaires; } });
+  state = freshState().map(c=>{
+    const e = map[c.nom+"|"+c.prenom];
+    if(!e) return c;
+    return Object.assign({}, c, {
+      absences:(e.absences&&e.absences.length)?e.absences:[blankAbs()], sig:e.sig||null,
+      transport:e.transport!=null?e.transport:c.transport, mutuelle:e.mutuelle!=null?e.mutuelle:c.mutuelle,
+      tr:e.tr!=null?e.tr:c.tr, commentaires:e.commentaires!=null?e.commentaires:c.commentaires
+    });
+  });
   dirSig = d.dirSig || null;
   $("dir-sign").innerHTML = dirSig ? `<img src="${dirSig}">` : "Toucher pour signer";
   if(d.dirNom!=null) $("dir-nom").value=d.dirNom;
   if(d.dirPrenom!=null) $("dir-prenom").value=d.dirPrenom;
 }
 function loadPeriod(){
+  removedKeys = [];
   state = freshState(); dirSig=null;
   $("dir-sign").innerHTML="Toucher pour signer"; $("dir-nom").value=""; $("dir-prenom").value="";
   try{ const raw=localStorage.getItem(periodKey()); if(raw) applySnapshot(JSON.parse(raw)); }catch(e){}
@@ -659,12 +674,13 @@ function loadSnapshot(per){
   const [y,m]=per.split("-");
   moisSel.value=String(+m-1); $("annee").value=y;
   const key=periodKey();
-  state=freshState(); dirSig=null;
+  removedKeys = []; state=freshState(); dirSig=null;
   $("dir-sign").innerHTML="Toucher pour signer"; $("dir-nom").value=""; $("dir-prenom").value="";
   try{
     const raw=localStorage.getItem(key);
     if(raw){
       const d=JSON.parse(raw);
+      removedKeys = d.removed || [];
       if(d.state && d.state.length){
         state=d.state.map(e=>({
           nom:e.nom, prenom:e.prenom, tps:e.tps||"", transport:e.transport||"",
@@ -708,7 +724,10 @@ function renderTable(){
       tr.className = cls.trim();
       let h = "";
       if(ai===0){
-        h += `<td class="c-name" rowspan="${k}">${esc(c.nom)}<br><button class="add-abs" data-g="${gi}">+ absence</button></td>`;
+        const canRemove = authGet() && authGet().role === "RH";
+        h += `<td class="c-name" rowspan="${k}">${esc(c.nom)}<br><button class="add-abs" data-g="${gi}">+ absence</button>` +
+          (canRemove ? `<button class="rm-emp" data-rmemp="${gi}" title="À utiliser si la personne a quitté l'entreprise et n'a pas encore été retirée du fichier source">Retirer</button>` : "") +
+          `</td>`;
         h += `<td class="c-prenom" rowspan="${k}">${esc(c.prenom)}</td>`;
         h += `<td class="c-tps" rowspan="${k}">${esc(c.tps)}</td>`;
       }
@@ -753,6 +772,16 @@ tbody.addEventListener("click", e=>{
   if(add){ state[+add.dataset.g].absences.push(blankAbs()); renderTable(); save(); return; }
   const rm = e.target.closest(".rm-abs");
   if(rm){ state[+rm.dataset.g].absences.splice(+rm.dataset.a,1); renderTable(); save(); updateChecklist(); return; }
+  const rmEmp = e.target.closest("[data-rmemp]");
+  if(rmEmp){
+    const gi = +rmEmp.dataset.rmemp, c = state[gi];
+    if(c && confirm(`Retirer ${c.prenom} ${c.nom} de cette fiche ?\n\nÀ utiliser uniquement si la personne a quitté l'entreprise et n'a pas encore été retirée du fichier source. Cette ligne ne réapparaîtra plus ce mois-ci.`)){
+      removedKeys.push(c.nom+"|"+c.prenom);
+      state.splice(gi,1);
+      renderTable(); save(); updateChecklist();
+    }
+    return;
+  }
   const sig = e.target.closest("[data-sig]"); if(sig){ openPad("collab", +sig.dataset.sig); return; }
   const ed = e.target.closest("[data-sigedit]"); if(ed){ openPad("collab", +ed.dataset.sigedit); return; }
 });
