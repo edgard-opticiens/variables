@@ -193,8 +193,8 @@ body.modal-open{overflow:hidden;position:fixed;width:100%}
           <div class="store-name"><small>Magasin</small><span id="store-title">BORDO</span></div>
         </div>
         <div class="head-fields">
-          <div class="field"><label>Mois</label><select id="mois" disabled></select></div>
-          <div class="field"><label>Année</label><input id="annee" type="number" value="2026" disabled></div>
+          <div class="field"><label>Mois</label><select id="mois"></select></div>
+          <div class="field"><label>Année</label><input id="annee" type="number" value="2026" min="2024"></div>
           <div class="field"><label>Historique</label><select id="hist" title="Rouvrir un mois précédent pour finir les signatures"></select></div>
           <button class="reset-btn" id="reset-btn" title="Effacer la saisie de ce magasin">↺ Réinitialiser</button>
         </div>
@@ -359,6 +359,7 @@ function esc(s){ return (s==null?"":(""+s)).replace(/&/g,"&amp;").replace(/</g,"
 const moisSel = $("mois");
 MOIS.forEach((m,i)=>{ const o=document.createElement("option"); o.value=i; o.textContent=m; moisSel.appendChild(o); });
 const now = new Date();
+$("annee").max = now.getFullYear();
 
 /* ---------- ACCÈS SÉCURISÉ : le code est vérifié par le serveur (n8n) ----------
    Magasin : code d'accès du magasin (comme avant) -> on ne reçoit que la fiche de ce magasin.
@@ -635,6 +636,14 @@ function onPeriodChange(){
   if(prevKey) saveTo(prevKey);
   loadPeriod();
   prevKey = periodKey();
+  // Avant ce correctif, les selecteurs Mois/Annee etaient desactives en dur et le seul moyen de
+  // revoir un mois precedent etait le select #hist, qui ne liste que les mois presents dans le
+  // localStorage de cet appareil precis -- un directeur sur un nouvel appareil/navigateur (ou
+  // cache vide) ne voyait donc jamais ses mois precedents, meme deja archives cote cloud. Les
+  // selecteurs Mois/Annee declenchent deja loadPeriod() -> cloudLoad() ci-dessus, qui va chercher
+  // l'etat sur le cloud n8n quelle que soit la periode choisie : on les reactive donc (cf. HTML) et
+  // on reutilise le meme bandeau d'avertissement que le select #hist pour rester coherent.
+  if(perOf() !== currentPer){ showHistBanner(perOf()); } else { hideHistBanner(); }
 }
 moisSel.addEventListener("change", onPeriodChange);
 $("annee").addEventListener("change", onPeriodChange);
